@@ -113,7 +113,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
   return (
-    <div className={`${generateBlockClass(`${styles.container}`, blockClass)} ${orientationToken}`}>
+    <div className={`${generateBlockClass(`${styles.groupContainer}`, blockClass)} ${orientationToken}`}>
       {badges.map((badge: VisibleSpecification, idx: number) => {
         const { show } = badge
         let valueToShow = show
