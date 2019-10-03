@@ -10,39 +10,40 @@ interface Props {
 }
 
 const checkConditionForSpecification = (condition: Condition, specification: Specification) => {
-  const { type, value, show } = condition
-  if (!show) {
+  const { displayValue, visibleWhen } = condition
+  if (!displayValue) {
     return false
   }
 
-  if (type === 'exists') {
+  if (!visibleWhen) {
     return specification.values && specification.values[0]
   }
 
-  if (type === 'equals') {
-    return specification.values && value && specification.values[0] === value
-  }
-
-  return false
+  return specification.values && visibleWhen && specification.values[0] === visibleWhen
 }
 
-const getValidSpecificationForCondition = (condition: Condition, specifications: Specification[]) => {
-  const { show, name } = condition
-  const specification = specifications.find(propEq('name', name))
+const getValidSpecificationForCondition = (condition: ConditionWithName, specifications: Specification[]) => {
+  const { displayValue, specificationName } = condition
+  const specification = specifications.find(propEq('name', specificationName))
   if (!specification) {
     return null
   }
 
   const isValid = checkConditionForSpecification(condition, specification)
-  return isValid ? { show, specification } : null
+  return isValid ? { displayValue, specification } : null
 }
 
 interface VisibleSpecification {
   specification: Specification
-  show: Condition['show']
+  displayValue: Condition['displayValue']
 }
 
-const getVisibleBadges = (product: Product | undefined, conditions: BaseProps['conditions'], groupName: string) => {
+const getVisibleBadges = (
+  product: Product | undefined,
+  baseCondition: ConditionWithName,
+  groupName: string,
+  specificationsOptions: BaseProps['specificationsOptions']
+) => {
   if (!product) {
     return []
   }
@@ -53,22 +54,31 @@ const getVisibleBadges = (product: Product | undefined, conditions: BaseProps['c
     return []
   }
 
-  if (!Array.isArray(conditions)) {
-    const condition = conditions as Condition
+  let badges = [] as VisibleSpecification[]
 
-    // If is an object and not array, apply this rule to all
-    return group.specifications.map(spec => {
-      if (checkConditionForSpecification(condition, spec)) {
-        return { specification: spec, show: condition.show }
+  if (baseCondition.visibleWhen && baseCondition.displayValue) {
+    const { specificationName } = baseCondition
+    const specifications =
+      specificationName ? group.specifications.filter(propEq('name', specificationName)) : group.specifications
+
+    badges = specifications.map(spec => {
+      if (checkConditionForSpecification(baseCondition, spec)) {
+        return { specification: spec, displayValue: baseCondition.displayValue }
       }
       return null
     }).filter(Boolean) as VisibleSpecification[]
   }
 
-  const conditionsArray = conditions as Condition[]
-  return conditionsArray.map(cond =>
-    getValidSpecificationForCondition(cond, group!.specifications))
-    .filter(Boolean) as VisibleSpecification[]
+  if (specificationsOptions) {
+    const conditionsNames = Object.keys(specificationsOptions)
+    const optionsBadges = conditionsNames.map(name =>
+      getValidSpecificationForCondition({ ...specificationsOptions[name], specificationName: name }, group.specifications))
+      .filter(Boolean) as VisibleSpecification[]
+
+    badges = badges.concat(optionsBadges)
+  }
+
+  return badges
 }
 
 const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) => {
@@ -98,13 +108,21 @@ const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) 
 const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   product,
   groupName,
-  conditions,
+  visibleWhen,
+  specificationsOptions,
+  specificationName,
+  displayValue,
   blockClass,
   orientation = 'vertical'
 }) => {
-  const badges = getVisibleBadges(product, conditions, groupName)
+  const badges = getVisibleBadges(
+    product,
+    { specificationName, displayValue, visibleWhen },
+    groupName,
+    specificationsOptions
+  )
 
-  if (!product || !conditions || badges.length === 0) {
+  if (!product || badges.length === 0) {
     return null
   }
 
@@ -115,17 +133,17 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   return (
     <div className={`${generateBlockClass(`${styles.groupContainer}`, blockClass)} ${orientationToken}`}>
       {badges.map((badge: VisibleSpecification, idx: number) => {
-        const { show } = badge
-        let valueToShow = show
-        if (show === 'SPECIFICATION_VALUE') {
+        const { displayValue } = badge
+        let valueToShow = displayValue
+        if (displayValue === 'SPECIFICATION_VALUE') {
           valueToShow = badge.specification.values[0]
         }
 
-        if (show === 'SPECIFICATION_NAME') {
+        if (displayValue === 'SPECIFICATION_NAME') {
           valueToShow = badge.specification.name
         }
 
-        if (!show) {
+        if (!displayValue) {
           return null
         }
         const slugifiedName = slugify(badge.specification.name)

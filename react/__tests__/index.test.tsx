@@ -13,7 +13,13 @@ const renderComponent = (customProps: any = {}) => {
 
   return render(
     <ProductContextProvider product={product}>
-      <Index conditions={customProps.conditions} groupName={customProps.groupName} />
+      <Index
+        visibleWhen={customProps.visibleWhen}
+        specificationsOptions={customProps.specificationsOptions}
+        groupName={customProps.groupName}
+        specificationName={customProps.specificationName}
+        displayValue={customProps.displayValue}
+      />
     </ProductContextProvider>
   )
 }
@@ -63,12 +69,9 @@ test('show names inside group that meet condition', () => {
   ]
 
   const { getByText, queryByText } = renderComponent({
-    conditions: {
-      type: "equals",
-      value: "True",
-      show: "SPECIFICATION_NAME",
-    },
     groupName: "allSpecifications",
+    displayValue: 'SPECIFICATION_NAME',
+    visibleWhen: 'True',
     product: getProduct({ specificationGroups }),
   })
 
@@ -121,15 +124,136 @@ test('show names inside group that meet conditions array', () => {
     },
   ]
 
+
   const { getByText, queryByText } = renderComponent({
-    conditions: [{
-      name: 'On Sale',
-      type: "equals",
-      value: "True",
-      show: "SPECIFICATION_NAME",
-    },
-    ],
     groupName: "allSpecifications",
+    specificationsOptions: {
+      ['On Sale']: {
+        displayValue: 'SPECIFICATION_NAME',
+        visibleWhen: 'True',
+      }
+    },
+    product: getProduct({ specificationGroups }),
+  })
+
+  getByText(/On Sale/)
+  expect(queryByText(/Demo/)).toBeFalsy()
+  expect(queryByText(/PromoExclusion/)).toBeFalsy()
+})
+
+test('show badges of generic condition and for specific options', () => {
+
+  const specificationGroups = [
+    {
+      name: 'Group',
+      specifications: [
+        {
+          name: 'On Sale',
+          values: ['True'],
+        },
+      ],
+    },
+    {
+      name: 'Group 2',
+      specifications: [
+        {
+          name: 'Demo',
+          values: ['Enabled'],
+        },
+        {
+          name: 'PromoExclusion',
+          values: ['1'],
+        }
+      ],
+    },
+    {
+      name: 'allSpecifications',
+      specifications: [
+        {
+          name: 'On Sale',
+          values: ['True'],
+        },
+        {
+          name: 'Demo',
+          values: ['Enabled'],
+        },
+        {
+          name: 'PromoExclusion',
+          values: ['1'],
+        },
+      ],
+    },
+  ]
+
+
+  const { getByText, queryByText } = renderComponent({
+    groupName: "allSpecifications",
+    displayValue: 'SPECIFICATION_NAME',
+    visibleWhen: 'True',
+    specificationsOptions: {
+      ['Demo']: {
+        displayValue: 'SPECIFICATION_NAME',
+        visibleWhen: 'Enabled',
+      }
+    },
+    product: getProduct({ specificationGroups }),
+  })
+
+  getByText(/On Sale/)
+  getByText(/Demo/)
+  expect(queryByText(/PromoExclusion/)).toBeFalsy()
+})
+
+test('test generic condition with specification Name being passed', () => {
+
+  const specificationGroups = [
+    {
+      name: 'Group',
+      specifications: [
+        {
+          name: 'On Sale',
+          values: ['True'],
+        },
+      ],
+    },
+    {
+      name: 'Group 2',
+      specifications: [
+        {
+          name: 'Demo',
+          values: ['True'],
+        },
+        {
+          name: 'PromoExclusion',
+          values: ['1'],
+        }
+      ],
+    },
+    {
+      name: 'allSpecifications',
+      specifications: [
+        {
+          name: 'On Sale',
+          values: ['True'],
+        },
+        {
+          name: 'Demo',
+          values: ['True'],
+        },
+        {
+          name: 'PromoExclusion',
+          values: ['1'],
+        },
+      ],
+    },
+  ]
+
+
+  const { getByText, queryByText } = renderComponent({
+    groupName: "allSpecifications",
+    displayValue: 'SPECIFICATION_NAME',
+    visibleWhen: 'True',
+    specificationName: 'On Sale',
     product: getProduct({ specificationGroups }),
   })
 
@@ -183,22 +307,18 @@ test('test show demo, value and custom string', () => {
   ]
 
   const { getByText } = renderComponent({
-    conditions: [{
-      name: 'On Sale',
-      type: "equals",
-      value: "True",
-      show: "SPECIFICATION_NAME",
+    specificationsOptions: {
+      ['On Sale']: {
+        displayValue: 'SPECIFICATION_NAME',
+        visibleWhen: 'True',
+      },
+      Demo: {
+        displayValue: 'SPECIFICATION_VALUE',
+      },
+      PromoExclusion: {
+        displayValue: "Custom String"
+      }
     },
-    {
-      name: 'Demo',
-      type: "exists",
-      show: "SPECIFICATION_VALUE",
-    },
-    {
-      name: 'PromoExclusion',
-      type: "exists",
-      show: "Custom String",
-    }],
     groupName: "allSpecifications",
     product: getProduct({ specificationGroups }),
   })
@@ -253,12 +373,18 @@ test('dont break if wrong group name', () => {
   ]
 
   const { queryByText } = renderComponent({
-    conditions: [{
-      name: 'On Sale',
-      type: "equals",
-      value: "True",
-      show: "SPECIFICATION_NAME",
-    }],
+    specificationsOptions: {
+      ['On Sale']: {
+        displayValue: 'SPECIFICATION_NAME',
+        visibleWhen: 'True',
+      },
+      Demo: {
+        displayValue: 'SPECIFICATION_VALUE',
+      },
+      PromoExclusion: {
+        displayValue: "Custom String"
+      }
+    },
     groupName: "adsaadsad",
     product: getProduct({ specificationGroups }),
   })
@@ -266,7 +392,7 @@ test('dont break if wrong group name', () => {
   expect(queryByText(/On Sale/)).toBeFalsy()
 })
 
-test('dont show item with show condition not provided', () => {
+test('dont show item with displayValue condition not provided', () => {
 
   const specificationGroups = [
     {
@@ -311,17 +437,14 @@ test('dont show item with show condition not provided', () => {
   ]
 
   const { queryByText, getByText } = renderComponent({
-    conditions: [{
-      name: 'On Sale',
-      type: "equals",
-      value: "True",
-      show: "SPECIFICATION_NAME",
+    specificationsOptions: {
+      ['On Sale']: {
+        displayValue: 'SPECIFICATION_NAME',
+        visibleWhen: 'True',
+      },
+      Demo: {
+      },
     },
-    {
-      name: 'Demo',
-      type: "equals",
-      value: "True",
-    }],
     groupName: "allSpecifications",
     product: getProduct({ specificationGroups }),
   })

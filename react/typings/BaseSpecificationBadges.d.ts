@@ -1,12 +1,15 @@
 interface Condition {
-  name?: string
-  type: 'equals' | 'exists'
-  value?: string
-  show: 'SPECIFICATION_NAME' | 'SPECIFICATION_VALUE' | string
+  visibleWhen?: string
+  displayValue?: 'SPECIFICATION_NAME' | 'SPECIFICATION_VALUE' | string
 }
 
-interface BaseProps {
+interface BaseProps extends Condition {
   groupName: string | 'allSpecifications'
-  conditions: Condition | Condition[]
   orientation?: 'vertical' | 'horizontal'
+  specificationsOptions?: Record<string, Condition>
+  specificationName?: string
+}
+
+type ConditionWithName = Condition & {
+  specificationName: BaseProps['specificationName']
 }
