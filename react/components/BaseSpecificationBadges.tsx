@@ -108,7 +108,7 @@ const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) 
 
 const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   product,
-  groupName,
+  specificationGroupName,
   visibleWhen,
   specificationsOptions,
   specificationName,
@@ -119,7 +119,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   const badges = getVisibleBadges(
     product,
     { specificationName, displayValue, visibleWhen },
-    groupName,
+    specificationGroupName,
     specificationsOptions
   )
 
@@ -145,6 +145,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
         }
 
         if (!displayValue) {
+          console.warn('You need to set a `displayValue` for the `product-specification-badges` block, either `SPECIFICATION_VALUE` or `SPECIFICATION_NAME`')
           return null
         }
         const slugifiedName = slugify(badge.specification.name)

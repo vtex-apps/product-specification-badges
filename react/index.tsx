@@ -4,7 +4,7 @@ import { BlockClass } from '@vtex/css-handles'
 import BaseSpecificationBadges from './components/BaseSpecificationBadges'
 
 const ProductSpecificationBadges: FC<BaseProps & BlockClass> = ({
-  groupName,
+  specificationGroupName,
   visibleWhen,
   specificationsOptions,
   specificationName,
@@ -18,7 +18,7 @@ const ProductSpecificationBadges: FC<BaseProps & BlockClass> = ({
       product={product}
       blockClass={blockClass}
       orientation={orientation}
-      groupName={groupName}
+      specificationGroupName={specificationGroupName}
       visibleWhen={visibleWhen}
       specificationsOptions={specificationsOptions}
       specificationName={specificationName}

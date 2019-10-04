@@ -16,7 +16,7 @@ const renderComponent = (customProps: any = {}) => {
       <Index
         visibleWhen={customProps.visibleWhen}
         specificationsOptions={customProps.specificationsOptions}
-        groupName={customProps.groupName}
+        specificationGroupName={customProps.specificationGroupName}
         specificationName={customProps.specificationName}
         displayValue={customProps.displayValue}
       />
@@ -69,7 +69,7 @@ test('show names inside group that meet condition', () => {
   ]
 
   const { getByText, queryByText } = renderComponent({
-    groupName: "allSpecifications",
+    specificationGroupName: "allSpecifications",
     displayValue: 'SPECIFICATION_NAME',
     visibleWhen: 'True',
     product: getProduct({ specificationGroups }),
@@ -126,7 +126,7 @@ test('show names inside group that meet conditions array', () => {
 
 
   const { getByText, queryByText } = renderComponent({
-    groupName: "allSpecifications",
+    specificationGroupName: "allSpecifications",
     specificationsOptions: {
       ['On Sale']: {
         displayValue: 'SPECIFICATION_NAME',
@@ -187,7 +187,7 @@ test('show badges of generic condition and for specific options', () => {
 
 
   const { getByText, queryByText } = renderComponent({
-    groupName: "allSpecifications",
+    specificationGroupName: "allSpecifications",
     displayValue: 'SPECIFICATION_NAME',
     visibleWhen: 'True',
     specificationsOptions: {
@@ -250,7 +250,7 @@ test('test generic condition with specification Name being passed', () => {
 
 
   const { getByText, queryByText } = renderComponent({
-    groupName: "allSpecifications",
+    specificationGroupName: "allSpecifications",
     displayValue: 'SPECIFICATION_NAME',
     visibleWhen: 'True',
     specificationName: 'On Sale',
@@ -319,7 +319,7 @@ test('test show demo, value and custom string', () => {
         displayValue: "Custom String"
       }
     },
-    groupName: "allSpecifications",
+    specificationGroupName: "allSpecifications",
     product: getProduct({ specificationGroups }),
   })
 
@@ -385,7 +385,7 @@ test('dont break if wrong group name', () => {
         displayValue: "Custom String"
       }
     },
-    groupName: "adsaadsad",
+    specificationGroupName: "adsaadsad",
     product: getProduct({ specificationGroups }),
   })
 
@@ -445,7 +445,7 @@ test('dont show item with displayValue condition not provided', () => {
       Demo: {
       },
     },
-    groupName: "allSpecifications",
+    specificationGroupName: "allSpecifications",
     product: getProduct({ specificationGroups }),
   })
 
