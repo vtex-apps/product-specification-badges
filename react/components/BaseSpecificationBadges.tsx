@@ -4,6 +4,7 @@ import { generateBlockClass, BlockClass } from '@vtex/css-handles'
 import slugify from '../modules/slug'
 
 import styles from './styles.css'
+import { Orientations, DisplayValues } from '../modules/constants'
 
 interface Props {
   product?: Product
@@ -113,7 +114,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   specificationName,
   displayValue,
   blockClass,
-  orientation = 'vertical'
+  orientation = Orientations.vertical
 }) => {
   const badges = getVisibleBadges(
     product,
@@ -126,7 +127,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
     return null
   }
 
-  const isVertical = orientation === 'vertical'
+  const isVertical = orientation === Orientations.vertical
 
   const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
@@ -135,11 +136,11 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
       {badges.map((badge: VisibleSpecification, idx: number) => {
         const { displayValue } = badge
         let valueToShow = displayValue
-        if (displayValue === 'SPECIFICATION_VALUE') {
+        if (displayValue === DisplayValues.specificationValue) {
           valueToShow = badge.specification.values[0]
         }
 
-        if (displayValue === 'SPECIFICATION_NAME') {
+        if (displayValue === DisplayValues.specificationName) {
           valueToShow = badge.specification.name
         }
 
