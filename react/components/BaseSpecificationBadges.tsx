@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
 import { propEq } from 'ramda'
-import { generateBlockClass, BlockClass } from '@vtex/css-handles'
 import slugify from '../modules/slug'
+import { useCssHandles, applyModifiers } from 'vtex.css-handles'
 
-import styles from './styles.css'
 import { Orientations, DisplayValues } from '../modules/constants'
+
+const CSS_HANDLES = ['groupContainer', 'badgeContainer', 'badgeText'] as const
 
 interface Props {
   product?: Product
@@ -106,14 +107,13 @@ const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) 
   return marginTokens.trim()
 }
 
-const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
+const BaseSpecificationBadges: FC<Props & BaseProps> = ({
   product,
   specificationGroupName,
   visibleWhen,
   specificationsOptions,
   specificationName,
   displayValue,
-  blockClass,
   orientation = Orientations.vertical
 }) => {
   const badges = getVisibleBadges(
@@ -122,6 +122,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
     specificationGroupName,
     specificationsOptions
   )
+  const handles = useCssHandles(CSS_HANDLES)
 
   if (!product || badges.length === 0) {
     return null
@@ -132,8 +133,8 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
   const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
   return (
-    <div className={`${generateBlockClass(`${styles.groupContainer}`, blockClass)} ${orientationToken}`}>
-      {badges.map((badge: VisibleSpecification, idx: number) => {
+    <div className={`${handles.groupContainer} ${orientationToken}`}>
+      {badges.map((badge, idx) => {
         const { displayValue } = badge
         let valueToShow = displayValue
         if (displayValue === DisplayValues.specificationValue) {
@@ -153,10 +154,10 @@ const BaseSpecificationBadges: FC<Props & BaseProps & BlockClass> = ({
         return (
           <div
             key={`${badge.specification.name}-${valueToShow}`}
-            className={`${styles.badgeContainer} ${styles.badgeContainer}--${slugifiedName} ${marginToken} bg-base flex items-center justify-center`}
+            className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center`}
             style={{ borderRadius: '50%', minHeight: "3.5em" }}
           >
-            <span className={`${styles.badgeText} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
+            <span className={`${handles.badgeText} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
           </div>
         )
       })}
