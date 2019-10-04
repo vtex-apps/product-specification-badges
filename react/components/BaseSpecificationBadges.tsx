@@ -133,7 +133,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps> = ({
   const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
   return (
-    <div className={`${handles.groupContainer} ${orientationToken}`}>
+    <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
       {badges.map((badge, idx) => {
         const { displayValue } = badge
         let valueToShow = displayValue
@@ -154,8 +154,7 @@ const BaseSpecificationBadges: FC<Props & BaseProps> = ({
         return (
           <div
             key={`${badge.specification.name}-${valueToShow}`}
-            className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center`}
-            style={{ borderRadius: '50%', minHeight: "3.5em" }}
+            className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center"`}
           >
             <span className={`${handles.badgeText} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
           </div>
