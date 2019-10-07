@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { propEq } from 'ramda'
 import slugify from '../modules/slug'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
@@ -105,7 +105,7 @@ const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) 
   return marginTokens.trim()
 }
 
-const BaseSpecificationBadges: FC<Props & BaseProps> = ({
+const BaseSpecificationBadges: StorefrontFunctionComponent<Props & BaseProps> = ({
   product,
   specificationGroupName,
   visibleWhen,
@@ -160,6 +160,69 @@ const BaseSpecificationBadges: FC<Props & BaseProps> = ({
       })}
     </div>
   )
+}
+
+BaseSpecificationBadges.schema = {
+  type: 'object',
+  properties: {
+    specificationGroupName: {
+      type: 'string',
+      title: 'admin/editor.product-specification-badges.specificationGroupName.title',
+      description: 'admin/editor.product-specification-badges.specificationGroupName.description'
+    },
+    specificationName: {
+      type: 'string',
+      title: 'admin/editor.product-specification-badges.specificationName.title',
+      description: 'admin/editor.product-specification-badges.specificationName.description'
+    },
+    visibleWhen: {
+      type: 'string',
+      title: 'admin/editor.product-specification-badges.visibleWhen.title',
+      description: 'admin/editor.product-specification-badges.visibleWhen.description'
+    },
+    displayValue: {
+      type: 'string',
+      title: 'admin/editor.product-specification-badges.displayValue.title',
+      description: 'admin/editor.product-specification-badges.displayValue.description'
+    },
+    orientation: {
+      title: 'admin/editor.product-specification-badges.orientation.title',
+      description: 'admin/editor.product-specification-badges.orientation.description',
+      enum: ['vertical', 'horizontal'],
+      enumNames: ['admin/editor.product-specification-badges.orientation.vertical', 'admin/editor.product-specification-badges.orientation.horizontal'],
+      type: 'string',
+      default: 'vertical',
+      widget: {
+        'ui:widget': 'radio',
+        'ui:options': {
+          inline: true,
+        },
+      },
+    },
+    specificationsOptions: {
+      type: 'array',
+      title: 'admin/editor.product-specification-badges.specificationsOptions.title',
+      description: 'admin/editor.product-specification-badges.specificationsOptions.description',
+      items: {
+        title: 'admin/editor.product-specification-badges.specificationsOptions.item.title',
+        type: 'object',
+        properties: {
+          specificationName: {
+            type: 'string',
+            title: 'admin/editor.product-specification-badges.specificationName.title',
+          },
+          visibleWhen: {
+            type: 'string',
+            title: 'admin/editor.product-specification-badges.visibleWhen.title',
+          },
+          displayValue: {
+            type: 'string',
+            title: 'admin/editor.product-specification-badges.displayValue.title',
+          },
+        }
+      }
+    }
+  }
 }
 
 export default BaseSpecificationBadges
