@@ -127,12 +127,11 @@ test('show names inside group that meet conditions array', () => {
 
   const { getByText, queryByText } = renderComponent({
     specificationGroupName: "allSpecifications",
-    specificationsOptions: {
-      ['On Sale']: {
-        displayValue: 'SPECIFICATION_NAME',
-        visibleWhen: 'True',
-      }
-    },
+    specificationsOptions: [{
+      specificationName: 'On Sale',
+      displayValue: 'SPECIFICATION_NAME',
+      visibleWhen: 'True',
+    }],
     product: getProduct({ specificationGroups }),
   })
 
@@ -190,12 +189,11 @@ test('show badges of generic condition and for specific options', () => {
     specificationGroupName: "allSpecifications",
     displayValue: 'SPECIFICATION_NAME',
     visibleWhen: 'True',
-    specificationsOptions: {
-      ['Demo']: {
-        displayValue: 'SPECIFICATION_NAME',
-        visibleWhen: 'Enabled',
-      }
-    },
+    specificationsOptions: [{
+      specificationName: 'Demo',
+      displayValue: 'SPECIFICATION_NAME',
+      visibleWhen: 'Enabled',
+    }],
     product: getProduct({ specificationGroups }),
   })
 
@@ -307,18 +305,31 @@ test('test show demo, value and custom string', () => {
   ]
 
   const { getByText } = renderComponent({
-    specificationsOptions: {
-      ['On Sale']: {
-        displayValue: 'SPECIFICATION_NAME',
-        visibleWhen: 'True',
-      },
-      Demo: {
-        displayValue: 'SPECIFICATION_VALUE',
-      },
-      PromoExclusion: {
-        displayValue: "Custom String"
-      }
+    // specificationsOptions: {
+    //   ['On Sale']: {
+    //     displayValue: 'SPECIFICATION_NAME',
+    //     visibleWhen: 'True',
+    //   },
+    //   Demo: {
+    //     displayValue: 'SPECIFICATION_VALUE',
+    //   },
+    //   PromoExclusion: {
+    //     displayValue: "Custom String"
+    //   }
+    // },
+    specificationsOptions: [{
+      specificationName: 'On Sale',
+      displayValue: 'SPECIFICATION_NAME',
+      visibleWhen: 'True',
     },
+    {
+      specificationName: 'Demo',
+      displayValue: 'SPECIFICATION_VALUE',
+    },
+    {
+      specificationName: 'PromoExclusion',
+      displayValue: 'Custom String',
+    }],
     specificationGroupName: "allSpecifications",
     product: getProduct({ specificationGroups }),
   })
@@ -373,18 +384,19 @@ test('dont break if wrong group name', () => {
   ]
 
   const { queryByText } = renderComponent({
-    specificationsOptions: {
-      ['On Sale']: {
-        displayValue: 'SPECIFICATION_NAME',
-        visibleWhen: 'True',
-      },
-      Demo: {
-        displayValue: 'SPECIFICATION_VALUE',
-      },
-      PromoExclusion: {
-        displayValue: "Custom String"
-      }
+    specificationsOptions: [{
+      specificationName: 'On Sale',
+      displayValue: 'SPECIFICATION_NAME',
+      visibleWhen: 'True',
     },
+    {
+      specificationName: 'Demo',
+      displayValue: 'SPECIFICATION_VALUE',
+    },
+    {
+      specificationName: 'PromoExclusion',
+      displayValue: 'Custom String',
+    }],
     specificationGroupName: "adsaadsad",
     product: getProduct({ specificationGroups }),
   })
@@ -437,14 +449,14 @@ test('dont show item with displayValue condition not provided', () => {
   ]
 
   const { queryByText, getByText } = renderComponent({
-    specificationsOptions: {
-      ['On Sale']: {
-        displayValue: 'SPECIFICATION_NAME',
-        visibleWhen: 'True',
-      },
-      Demo: {
-      },
+    specificationsOptions: [{
+      specificationName: 'On Sale',
+      displayValue: 'SPECIFICATION_NAME',
+      visibleWhen: 'True',
     },
+    {
+      specificationName: 'Demo',
+    }],
     specificationGroupName: "allSpecifications",
     product: getProduct({ specificationGroups }),
   })

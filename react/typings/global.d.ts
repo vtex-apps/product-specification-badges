@@ -20,7 +20,7 @@ declare global {
   interface BaseProps extends Condition {
     specificationGroupName: string
     orientation?: Orientations
-    specificationsOptions?: Record<string, Condition>
+    specificationsOptions?: ConditionWithName[]
     specificationName?: string
   }
 

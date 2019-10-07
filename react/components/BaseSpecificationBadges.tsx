@@ -72,11 +72,9 @@ const getVisibleBadges = (
   }
 
   if (specificationsOptions) {
-    const conditionsNames = Object.keys(specificationsOptions)
-    const optionsBadges = conditionsNames.map(name =>
-      getValidSpecificationForCondition({ ...specificationsOptions[name], specificationName: name }, group.specifications))
+    const optionsBadges = specificationsOptions.map(option =>
+      getValidSpecificationForCondition(option, group.specifications))
       .filter(Boolean) as VisibleSpecification[]
-
     badges = badges.concat(optionsBadges)
   }
 
