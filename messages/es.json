@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "Medallas de especificación de producto",
+  "admin/editor.product-specification-badges.description": "Componente para mostrar medallas de especificación de producto en la página del producto",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "Nombre del grupo de especificación",
+  "admin/editor.product-specification-badges.specificationName.title": "Nombre de especificación",
+  "admin/editor.product-specification-badges.visibleWhen.title": "Visible cuándo",
+  "admin/editor.product-specification-badges.displayValue.title": "Valor para mostrar",
+  "admin/editor.product-specification-badges.orientation.title": "Orientación",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "Opciones de especificación",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "Opción de especificación",
+  "admin/editor.product-specification-badges.orientation.horizontal": "Horizontal",
+  "admin/editor.product-specification-badges.orientation.vertical": "Vertical",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "Nombre del grupo que desea aplicar",
+  "admin/editor.product-specification-badges.specificationName.description": "Nombre de la especificación que desea aplicar, deje en blanco para aplicar a todos los miembros del grupo",
+  "admin/editor.product-specification-badges.visibleWhen.description": "Ingrese un valor para mostrar la medalla solo cuando la especificación contenga un valor exactamente igual al pasado",
+  "admin/editor.product-specification-badges.displayValue.description": "Elija qué mostrar dentro de la medalla. Lea la documentación para conocer los posibles valores.",
+  "admin/editor.product-specification-badges.orientation.description": "Elija la orientación en la que desea mostrar las medallas",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Especifique opciones más detalladas para diferentes especificaciones dentro del grupo"
+}

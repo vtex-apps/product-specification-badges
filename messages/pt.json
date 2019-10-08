@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "Medalhas de Especificação de Produto",
+  "admin/editor.product-specification-badges.description": "Componente para mostrar as medalhas de especificação de produto na página de produto",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "Nome do Grupo de Especificação",
+  "admin/editor.product-specification-badges.specificationName.title": "Nome da Especificação",
+  "admin/editor.product-specification-badges.visibleWhen.title": "Visível Quando",
+  "admin/editor.product-specification-badges.displayValue.title": "Valor a mostrar",
+  "admin/editor.product-specification-badges.orientation.title": "Orientação",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "Opções de Especificações",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "Opção de Especificação",
+  "admin/editor.product-specification-badges.orientation.horizontal": "Horizontal",
+  "admin/editor.product-specification-badges.orientation.vertical": "Vertical",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "Nome do grupo que quer aplicar",
+  "admin/editor.product-specification-badges.specificationName.description": "Nome da especificação que você quer aplicar, deixe vazio para aplicar em todas dentro do grupo",
+  "admin/editor.product-specification-badges.visibleWhen.description": "Insira um valor para mostrar a medalha apenas quando a especificação conter um valor exatamente igual ao passado.",
+  "admin/editor.product-specification-badges.displayValue.description": "Escolha o que mostrar dentro da medalha. Leia a documentação para possíveis valores.Choose what to show inside badge.",
+  "admin/editor.product-specification-badges.orientation.description": "Escolha a orientação em que quer mostrar as medalhas",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Especifique opções mais detalhadas para diferentes especificações dentro do grupo"
+}

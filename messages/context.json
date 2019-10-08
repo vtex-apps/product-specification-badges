@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "Title of component",
+  "admin/editor.product-specification-badges.description": "Description of component",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "Title of specificationGroupName prop",
+  "admin/editor.product-specification-badges.specificationName.title": "Title of specificationName prop",
+  "admin/editor.product-specification-badges.visibleWhen.title": "Title of visibleWhen prop",
+  "admin/editor.product-specification-badges.displayValue.title": "Title of displayValue prop",
+  "admin/editor.product-specification-badges.orientation.title": "Title of orientation prop",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "Title of specificationsOptions prop",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "Title of specificationsOptions item",
+  "admin/editor.product-specification-badges.orientation.horizontal": "Name of value to show badges from left to right",
+  "admin/editor.product-specification-badges.orientation.vertical": "Name of value to show badges from up to left",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "Description of specificationGroupName prop",
+  "admin/editor.product-specification-badges.specificationName.description": "Description of specificationName prop",
+  "admin/editor.product-specification-badges.visibleWhen.description": "Description of visibleWhen prop",
+  "admin/editor.product-specification-badges.displayValue.description": "Description of displayValue prop",
+  "admin/editor.product-specification-badges.orientation.description": "Description of orientation prop",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Description of specificationsOptions prop"
+}
