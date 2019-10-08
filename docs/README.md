@@ -17,8 +17,13 @@ This component must be configured to be able to display the specifications prope
 | `blockClass`             | `string`                                                  | Allows to pass a custom name to be added to component css classes                                                                                                                                                                                                                       | `null`        |
 
 `Option` type:
-| Prop name | Type | Description | Default value |
-| --------- | -------- | ------------------------------------------------ | ------------- |
+
+
+
+
+
+| Prop name                | Type                                                      | Description                                                                                                                                                                                                                                                                             | Default value |
+| ------------------------ | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `specificationName` | `String` | Pass the name of the specification you want to target. If empty, option will not be checked. | "" |
 | `visibleWhen` | `string` | Pass this if you want this option to be applied when the specification has the exactly same value as specified in `visibleWhen`. If left empty, the badge will be showed regardless of the specification value. | `null` |
 | `displayValue` | `SPECIFICATION_NAME` or `SPECIFICATION_VALUE` or `string` | Choose the value that will appear if the option condition is met and the badge will be showed. Pass `SPECIFICATION_NAME` if you want to show the specification name. Pass `SPECIFICATION_VALUE` if you want to show its value. Pass any other custom string to show it. | `null` |
