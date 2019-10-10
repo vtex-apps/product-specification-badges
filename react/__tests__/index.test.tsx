@@ -464,3 +464,20 @@ test('dont show item with displayValue condition not provided', () => {
   getByText(/On Sale/)
   expect(queryByText(/Demo/)).toBeFalsy()
 })
+
+test('do not break if specificationgroups is undefined', () => {
+  const { queryByText } = renderComponent({
+    specificationsOptions: [{
+      specificationName: 'On Sale',
+      displayValue: 'SPECIFICATION_NAME',
+      visibleWhen: 'True',
+    },
+    {
+      specificationName: 'Demo',
+    }],
+    specificationGroupName: "allSpecifications",
+    product: getProduct({ specificationGroups: undefined }),
+  })
+
+  expect(queryByText(/On Sale/)).toBeFalsy()
+})
