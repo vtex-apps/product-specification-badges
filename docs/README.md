@@ -18,15 +18,11 @@ This component must be configured to be able to display the specifications prope
 
 `Option` type:
 
-
-
-
-
-| Prop name                | Type                                                      | Description                                                                                                                                                                                                                                                                             | Default value |
-| ------------------------ | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `specificationName` | `String` | Pass the name of the specification you want to target. If empty, option will not be checked. | "" |
-| `visibleWhen` | `string` | Pass this if you want this option to be applied when the specification has the exactly same value as specified in `visibleWhen`. If left empty, the badge will be showed regardless of the specification value. | `null` |
-| `displayValue` | `SPECIFICATION_NAME` or `SPECIFICATION_VALUE` or `string` | Choose the value that will appear if the option condition is met and the badge will be showed. Pass `SPECIFICATION_NAME` if you want to show the specification name. Pass `SPECIFICATION_VALUE` if you want to show its value. Pass any other custom string to show it. | `null` |
+| Prop name           | Type                                                      | Description                                                                                                                                                                                                                                                             | Default value |
+| ------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `specificationName` | `String`                                                  | Pass the name of the specification you want to target. If empty, option will not be checked.                                                                                                                                                                            | ""            |
+| `visibleWhen`       | `string`                                                  | Pass this if you want this option to be applied when the specification has the exactly same value as specified in `visibleWhen`. If left empty, the badge will be showed regardless of the specification value.                                                         | `null`        |
+| `displayValue`      | `SPECIFICATION_NAME` or `SPECIFICATION_VALUE` or `string` | Choose the value that will appear if the option condition is met and the badge will be showed. Pass `SPECIFICATION_NAME` if you want to show the specification name. Pass `SPECIFICATION_VALUE` if you want to show its value. Pass any other custom string to show it. | `null`        |
 
 Important note:
 All products come with a default `allSpecifications` group, that is a group that combines all specifications in your product. If you manually create another group and add a specification in it, this specification will also appear in the `allSpecifications` group. So, if you want to apply your conditions to all specification, regardless of group, you must pass the value `allSpecifications`.
@@ -35,54 +31,54 @@ All products come with a default `allSpecifications` group, that is a group that
 
 Let's say your product has this specification groups:
 
-```
+```json
 // specificationGroups array
 [
-    {
-      name: 'Group',
-      specifications: [
-        {
-          name: 'On Sale',
-          values: ['True'],
-        },
-      ],
-    },
-    {
-      name: 'Group 2',
-      specifications: [
-        {
-          name: 'Demo',
-          values: ['True'],
-        },
-        {
-          name: 'PromoExclusion',
-          values: ['1'],
-        }
-      ],
-    },
-    {
-      name: 'allSpecifications',
-      specifications: [
-        {
-          name: 'On Sale',
-          values: ['True'],
-        },
-        {
-          name: 'Demo',
-          values: ['True'],
-        },
-        {
-          name: 'PromoExclusion',
-          values: ['1'],
-        },
-      ],
-    },
-  ]
+  {
+    "name": "Group",
+    "specifications": [
+      {
+        "name": "On Sale",
+        "values": ["True"]
+      }
+    ]
+  },
+  {
+    "name": "Group 2",
+    "specifications": [
+      {
+        "name": "Demo",
+        "values": ["True"]
+      },
+      {
+        "name": "PromoExclusion",
+        "values": ["1"]
+      }
+    ]
+  },
+  {
+    "name": "allSpecifications",
+    "specifications": [
+      {
+        "name": "On Sale",
+        "values": ["True"]
+      },
+      {
+        "name": "Demo",
+        "values": ["True"]
+      },
+      {
+        "name": "PromoExclusion",
+        "values": ["1"]
+      }
+    ]
+  }
+]
 ```
 
 If you want to display all specifications with the value `True`, you could then pass:
 
-```
+```json
 "product-specification-badges": {
     "props": {
       "specificationGroupName": "allSpecifications",
@@ -98,7 +94,7 @@ In this case, it will appear the `On Sale` and `Demo` badges (because you passed
 
 Using the specification groups from example 1, we can get the same result with the specificationOptions prop:
 
-```
+```json
   "product-specification-badges": {
     "props": {
       "specificationGroupName": "allSpecifications",
@@ -118,54 +114,54 @@ Using the specification groups from example 1, we can get the same result with t
 
 ### Example 3
 
-```
+```json
 // specificationGroups array
 [
-    {
-      name: 'Group',
-      specifications: [
-        {
-          name: 'On Sale',
-          values: ['True'],
-        },
-      ],
-    },
-    {
-      name: 'Group 2',
-      specifications: [
-        {
-          name: 'Demo',
-          values: ['True'],
-        },
-        {
-          name: 'PromoExclusion',
-          values: ['1'],
-        }
-      ],
-    },
-    {
-      name: 'allSpecifications',
-      specifications: [
-        {
-          name: 'On Sale',
-          values: ['True'],
-        },
-        {
-          name: 'Demo',
-          values: ['My Cool Value'],
-        },
-        {
-          name: 'PromoExclusion',
-          values: ['1'],
-        },
-      ],
-    },
-  ]
+  {
+    "name": "Group",
+    "specifications": [
+      {
+        "name": "On Sale",
+        "values": ["True"]
+      }
+    ]
+  },
+  {
+    "name": "Group 2",
+    "specifications": [
+      {
+        "name": "Demo",
+        "values": ["True"]
+      },
+      {
+        "name": "PromoExclusion",
+        "values": ["1"]
+      }
+    ]
+  },
+  {
+    "name": "allSpecifications",
+    "specifications": [
+      {
+        "name": "On Sale",
+        "values": ["True"]
+      },
+      {
+        "name": "Demo",
+        "values": ["My Cool Value"]
+      },
+      {
+        "name": "PromoExclusion",
+        "values": ["1"]
+      }
+    ]
+  }
+]
 ```
 
 If you want to show the value for the `Demo` specification, you could pass:
 
-```
+```json
   "product-specification-badges": {
     "props": {
       "specificationGroupName": "allSpecifications",
@@ -192,7 +188,7 @@ Using the example given in example 3.
 
 To show a custom string you could do:
 
-```
+```json
   "product-specification-badges": {
     "props": {
       "specificationGroupName": "allSpecifications",
@@ -221,7 +217,7 @@ Note the usage of a custom value in the `displayValue` config.
 
 You can use our `stack-layout` to show the badges over your product image for example.
 
-```
+```json
   "stack-layout": {
     "children": [
       "product-images",
