@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "product-specification-badges",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "title": "Product Specification Badges",
   "description": "Display Product Specification Badges",
   "defaultLocale": "pt-BR",
