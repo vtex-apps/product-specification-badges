@@ -22,6 +22,7 @@ declare global {
     orientation?: Orientations
     specificationsOptions?: ConditionWithName[]
     specificationName?: string
+    specificationValueSeparator?: string
   }
 
   type ConditionWithName = Condition & {

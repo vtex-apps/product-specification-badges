@@ -81,38 +81,45 @@ const getVisibleBadges = (
   return badges
 }
 
-const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) => {
-  let marginTokens = ""
+const getMarginToken = (
+  isVertical: boolean,
+  isFirst: boolean,
+  isLast: boolean
+) => {
+  let marginTokens = ''
 
   if (isVertical) {
     if (!isFirst) {
-      marginTokens += "mt2 "
+      marginTokens += 'mt2 '
     }
     if (!isLast) {
-      marginTokens += "mb2 "
+      marginTokens += 'mb2 '
     }
   }
 
   if (!isVertical) {
     if (!isFirst) {
-      marginTokens += "ml2 "
+      marginTokens += 'ml2 '
     }
     if (!isLast) {
-      marginTokens += "mr2 "
+      marginTokens += 'mr2 '
     }
   }
 
   return marginTokens.trim()
 }
 
-const BaseSpecificationBadges: StorefrontFunctionComponent<Props & BaseProps> = ({
+const BaseSpecificationBadges: StorefrontFunctionComponent<
+  Props & BaseProps
+> = ({
   product,
   specificationGroupName,
   visibleWhen,
   specificationsOptions,
   specificationName,
   displayValue,
-  orientation = Orientations.vertical
+  orientation = Orientations.vertical,
+  specificationValueSeparator = '/',
 }) => {
   const badges = getVisibleBadges(
     product,
@@ -136,7 +143,9 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<Props & BaseProps> = 
         const { displayValue } = badge
         let valueToShow = displayValue
         if (displayValue === DisplayValues.specificationValue) {
-          valueToShow = badge.specification.values[0]
+          valueToShow = badge.specification.values.join(
+            specificationValueSeparator
+          )
         }
 
         if (displayValue === DisplayValues.specificationName) {

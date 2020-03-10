@@ -481,3 +481,32 @@ test('do not break if specificationgroups is undefined', () => {
 
   expect(queryByText(/On Sale/)).toBeFalsy()
 })
+
+test('display multiple specification values separated by a string', () => {
+  const specificationGroups = [
+    {
+      name: 'allSpecifications',
+      specifications: [
+        {
+          name: 'Season',
+          values: ['Spring', 'Summer'],
+        },
+      ],
+    },
+  ]
+
+  const { getByText } = renderComponent({
+    specificationsOptions: [
+      {
+        specificationName: 'Season',
+        visibleWhen: 'Spring',
+        displayValue: 'SPECIFICATION_VALUE',
+      },
+    ],
+    specificationValueSeparator: ', ',
+    specificationGroupName: 'allSpecifications',
+    product: getProduct({ specificationGroups }),
+  })
+
+  getByText(/Spring, Summer/)
+})
