@@ -156,7 +156,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
                   badge.specification.name
                 }" have multiple values (${specificationValues.join(
                   ','
-                )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once.`
+                )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
               )
             }
           }
