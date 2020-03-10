@@ -81,38 +81,45 @@ const getVisibleBadges = (
   return badges
 }
 
-const getMarginToken = (isVertical: boolean, isFirst: boolean, isLast: boolean) => {
-  let marginTokens = ""
+const getMarginToken = (
+  isVertical: boolean,
+  isFirst: boolean,
+  isLast: boolean
+) => {
+  let marginTokens = ''
 
   if (isVertical) {
     if (!isFirst) {
-      marginTokens += "mt2 "
+      marginTokens += 'mt2 '
     }
     if (!isLast) {
-      marginTokens += "mb2 "
+      marginTokens += 'mb2 '
     }
   }
 
   if (!isVertical) {
     if (!isFirst) {
-      marginTokens += "ml2 "
+      marginTokens += 'ml2 '
     }
     if (!isLast) {
-      marginTokens += "mr2 "
+      marginTokens += 'mr2 '
     }
   }
 
   return marginTokens.trim()
 }
 
-const BaseSpecificationBadges: StorefrontFunctionComponent<Props & BaseProps> = ({
+const BaseSpecificationBadges: StorefrontFunctionComponent<
+  Props & BaseProps
+> = ({
   product,
   specificationGroupName,
   visibleWhen,
   specificationsOptions,
   specificationName,
   displayValue,
-  orientation = Orientations.vertical
+  orientation = Orientations.vertical,
+  multipleValuesSeparator,
 }) => {
   const badges = getVisibleBadges(
     product,
@@ -136,7 +143,23 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<Props & BaseProps> = 
         const { displayValue } = badge
         let valueToShow = displayValue
         if (displayValue === DisplayValues.specificationValue) {
-          valueToShow = badge.specification.values[0]
+          const specificationValues = badge.specification.values
+
+          if (multipleValuesSeparator != null) {
+            valueToShow = specificationValues.join(multipleValuesSeparator)
+          } else {
+            valueToShow = specificationValues[0]
+
+            if (specificationValues.length > 1) {
+              console.warn(
+                `[product-specification-badges] The specification "${
+                  badge.specification.name
+                }" have multiple values (${specificationValues.join(
+                  ','
+                )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
+              )
+            }
+          }
         }
 
         if (displayValue === DisplayValues.specificationName) {

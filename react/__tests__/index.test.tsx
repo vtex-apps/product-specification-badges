@@ -19,6 +19,7 @@ const renderComponent = (customProps: any = {}) => {
         specificationGroupName={customProps.specificationGroupName}
         specificationName={customProps.specificationName}
         displayValue={customProps.displayValue}
+        multipleValuesSeparator={customProps.multipleValuesSeparator}
       />
     </ProductContextProvider>
   )
@@ -480,4 +481,33 @@ test('do not break if specificationgroups is undefined', () => {
   })
 
   expect(queryByText(/On Sale/)).toBeFalsy()
+})
+
+test('display multiple specification values separated by a string', () => {
+  const specificationGroups = [
+    {
+      name: 'allSpecifications',
+      specifications: [
+        {
+          name: 'Season',
+          values: ['Spring', 'Summer'],
+        },
+      ],
+    },
+  ]
+
+  const { getByText } = renderComponent({
+    specificationsOptions: [
+      {
+        specificationName: 'Season',
+        visibleWhen: 'Spring',
+        displayValue: 'SPECIFICATION_VALUE',
+      },
+    ],
+    multipleValuesSeparator: ', ',
+    specificationGroupName: 'allSpecifications',
+    product: getProduct({ specificationGroups }),
+  })
+
+  getByText(/Spring, Summer/)
 })

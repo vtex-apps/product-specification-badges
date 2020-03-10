@@ -8,7 +8,8 @@ const ProductSpecificationBadges: StorefrontFunctionComponent<BaseProps> = ({
   specificationsOptions,
   specificationName,
   displayValue,
-  orientation
+  orientation,
+  multipleValuesSeparator,
 }) => {
   const { product } = useProduct()
   return (
@@ -20,6 +21,7 @@ const ProductSpecificationBadges: StorefrontFunctionComponent<BaseProps> = ({
       specificationsOptions={specificationsOptions}
       specificationName={specificationName}
       displayValue={displayValue}
+      multipleValuesSeparator={multipleValuesSeparator}
     />
   )
 }
