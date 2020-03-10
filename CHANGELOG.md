@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed
 - Display all the values of a specification separated by a separator string.
-- Add `specificationValueSeparator` prop.
+- Add `multipleValuesSeparator` prop.
 
 ## [0.0.3] - 2020-01-13
 

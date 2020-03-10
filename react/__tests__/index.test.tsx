@@ -19,6 +19,7 @@ const renderComponent = (customProps: any = {}) => {
         specificationGroupName={customProps.specificationGroupName}
         specificationName={customProps.specificationName}
         displayValue={customProps.displayValue}
+        multipleValuesSeparator={customProps.multipleValuesSeparator}
       />
     </ProductContextProvider>
   )
@@ -503,7 +504,7 @@ test('display multiple specification values separated by a string', () => {
         displayValue: 'SPECIFICATION_VALUE',
       },
     ],
-    specificationValueSeparator: ', ',
+    multipleValuesSeparator: ', ',
     specificationGroupName: 'allSpecifications',
     product: getProduct({ specificationGroups }),
   })

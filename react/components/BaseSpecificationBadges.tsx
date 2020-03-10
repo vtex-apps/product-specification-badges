@@ -119,7 +119,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   specificationName,
   displayValue,
   orientation = Orientations.vertical,
-  specificationValueSeparator = '/',
+  multipleValuesSeparator,
 }) => {
   const badges = getVisibleBadges(
     product,
@@ -143,9 +143,23 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
         const { displayValue } = badge
         let valueToShow = displayValue
         if (displayValue === DisplayValues.specificationValue) {
-          valueToShow = badge.specification.values.join(
-            specificationValueSeparator
-          )
+          const specificationValues = badge.specification.values
+
+          if (multipleValuesSeparator != null) {
+            valueToShow = specificationValues.join(multipleValuesSeparator)
+          } else {
+            valueToShow = specificationValues[0]
+
+            if (specificationValues.length > 1) {
+              console.warn(
+                `[product-specification-badges] The specification "${
+                  badge.specification.name
+                }" have multiple values (${specificationValues.join(
+                  ','
+                )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once.`
+              )
+            }
+          }
         }
 
         if (displayValue === DisplayValues.specificationName) {
