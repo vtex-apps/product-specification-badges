@@ -49,8 +49,8 @@ const getVisibleBadges = (
   if (!product) {
     return []
   }
-  const { specificationGroups = [] } = product
-  const group = specificationGroups.find(propEq('name', groupName))
+  const { specificationGroups } = product
+  const group = specificationGroups?.find(propEq('name', groupName))
 
   if (!group) {
     return []
