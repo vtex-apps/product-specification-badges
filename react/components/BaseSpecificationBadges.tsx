@@ -26,7 +26,7 @@ const checkConditionForSpecification = (condition: Condition, specification: Spe
 
 const getValidSpecificationForCondition = (condition: ConditionWithName, specifications: Specification[]) => {
   const { displayValue, specificationName } = condition
-  const specification = specifications.find(propEq('name', specificationName))
+  const specification = specifications.find(propEq('originalName', specificationName))
   if (!specification) {
     return null
   }
@@ -50,7 +50,8 @@ const getVisibleBadges = (
     return []
   }
   const { specificationGroups } = product
-  const group = specificationGroups?.find(propEq('name', groupName))
+  
+  const group = specificationGroups?.find(propEq('originalName', groupName))
 
   if (!group) {
     return []
@@ -61,7 +62,7 @@ const getVisibleBadges = (
   if (baseCondition.visibleWhen && baseCondition.displayValue) {
     const { specificationName } = baseCondition
     const specifications =
-      specificationName ? group.specifications.filter(propEq('name', specificationName)) : group.specifications
+      specificationName ? group.specifications.filter(propEq('originalName', specificationName)) : group.specifications
 
     badges = specifications.map(spec => {
       if (checkConditionForSpecification(baseCondition, spec)) {
@@ -121,69 +122,69 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   orientation = Orientations.vertical,
   multipleValuesSeparator,
 }) => {
-  const badges = getVisibleBadges(
-    product,
-    { specificationName, displayValue, visibleWhen },
-    specificationGroupName,
-    specificationsOptions
-  )
-  const handles = useCssHandles(CSS_HANDLES)
+    const badges = getVisibleBadges(
+      product,
+      { specificationName, displayValue, visibleWhen },
+      specificationGroupName,
+      specificationsOptions
+    )
+    const handles = useCssHandles(CSS_HANDLES)
 
-  if (!product || badges.length === 0) {
-    return null
-  }
+    if (!product || badges.length === 0) {
+      return null
+    }
 
-  const isVertical = orientation === Orientations.vertical
+    const isVertical = orientation === Orientations.vertical
 
-  const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
+    const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
-  return (
-    <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
-      {badges.map((badge, idx) => {
-        const { displayValue } = badge
-        let valueToShow = displayValue
-        if (displayValue === DisplayValues.specificationValue) {
-          const specificationValues = badge.specification.values
+    return (
+      <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
+        {badges.map((badge, idx) => {
+          const { displayValue } = badge
+          let valueToShow = displayValue
+          if (displayValue === DisplayValues.specificationValue) {
+            const specificationValues = badge.specification.values
 
-          if (multipleValuesSeparator != null) {
-            valueToShow = specificationValues.join(multipleValuesSeparator)
-          } else {
-            valueToShow = specificationValues[0]
+            if (multipleValuesSeparator != null) {
+              valueToShow = specificationValues.join(multipleValuesSeparator)
+            } else {
+              valueToShow = specificationValues[0]
 
-            if (specificationValues.length > 1) {
-              console.warn(
-                `[product-specification-badges] The specification "${
+              if (specificationValues.length > 1) {
+                console.warn(
+                  `[product-specification-badges] The specification "${
                   badge.specification.name
-                }" have multiple values (${specificationValues.join(
-                  ','
-                )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
-              )
+                  }" have multiple values (${specificationValues.join(
+                    ','
+                  )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
+                )
+              }
             }
           }
-        }
 
-        if (displayValue === DisplayValues.specificationName) {
-          valueToShow = badge.specification.name
-        }
+          if (displayValue === DisplayValues.specificationName) {
+            valueToShow = badge.specification.name
+          }
 
-        if (!displayValue) {
-          console.warn('You need to set a `displayValue` for the `product-specification-badges` block, either `SPECIFICATION_VALUE` or `SPECIFICATION_NAME`')
-          return null
-        }
-        const slugifiedName = slugify(badge.specification.name)
-        const marginToken = getMarginToken(isVertical, idx === 0, idx === badges.length - 1)
-        return (
-          <div
-            key={`${badge.specification.name}-${valueToShow}`}
-            className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center"`}
-          >
-            <span className={`${handles.badgeText} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
-          </div>
-        )
-      })}
-    </div>
-  )
-}
+          if (!displayValue) {
+            console.warn('You need to set a `displayValue` for the `product-specification-badges` block, either `SPECIFICATION_VALUE` or `SPECIFICATION_NAME`')
+            return null
+          }
+          const slugifiedName = slugify(badge.specification.name)
+          const marginToken = getMarginToken(isVertical, idx === 0, idx === badges.length - 1)
+          return (
+            <div
+              key={`${badge.specification.name}-${valueToShow}`}
+              className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center"`}
+            >
+              <span className={`${handles.badgeText} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
 BaseSpecificationBadges.schema = {
   type: 'object',
