@@ -30,39 +30,48 @@ test('show names inside group that meet condition', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         }
       ],
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -86,39 +95,48 @@ test('show names inside group that meet conditions array', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         }
       ],
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -146,39 +164,48 @@ test('show badges of generic condition and for specific options', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['Enabled'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         }
       ],
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['Enabled'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -208,39 +235,48 @@ test('test generic condition with specification Name being passed', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         }
       ],
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -266,39 +302,48 @@ test('test show demo, value and custom string', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['DemoValue'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         }
       ],
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['DemoValue'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -345,18 +390,22 @@ test('dont break if wrong group name', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['DemoValue'],
         },
         {
@@ -367,17 +416,21 @@ test('dont break if wrong group name', () => {
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['DemoValue'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -410,39 +463,48 @@ test('dont show item with displayValue condition not provided', () => {
   const specificationGroups = [
     {
       name: 'Group',
+      originalName: 'Group',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
       ],
     },
     {
       name: 'Group 2',
+      originalName: 'Group 2',
       specifications: [
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         }
       ],
     },
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'On Sale',
+          originalName: 'On Sale',
           values: ['True'],
         },
         {
           name: 'Demo',
+          originalName: 'Demo',
           values: ['True'],
         },
         {
           name: 'PromoExclusion',
+          originalName: 'PromoExclusion',
           values: ['1'],
         },
       ],
@@ -487,9 +549,11 @@ test('display multiple specification values separated by a string', () => {
   const specificationGroups = [
     {
       name: 'allSpecifications',
+      originalName: 'allSpecifications',
       specifications: [
         {
           name: 'Season',
+          originalName: 'Season',
           values: ['Spring', 'Summer'],
         },
       ],

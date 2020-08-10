@@ -29,7 +29,7 @@
     "graphql": "^15.0.0",
     "prettier": "^1.18.2",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "3.5.2"
+    "typescript": "3.8.3"
   },
   "vtexTestTools": {
     "defaultLocale": "pt-BR"
