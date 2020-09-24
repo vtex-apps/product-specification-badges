@@ -251,10 +251,11 @@ You can use our `stack-layout` to show the badges over your product image for ex
 | `badgeContainer` | Container for each badge                    |
 | `badgeText`      | Text displayed inside badge                 |
 
-Note: each badge also receives a class `badgeContainer` with its specification name slug appended to it.
-Example: on specification `On Sale` the badge will also have the class `badgeContainer--on-sale`.
-Note: each badge also receives a class `badgeText` with its specification value slug appended to it.
-Example: on specification `On Sale` the badge will also have the class `badgeText--on-sale`.
+Note: each badge receives a class `badgeContainer` with its specification name slug appended to it.
+Example: with the specification `On Sale: true` the badge will also have the class `badgeContainer--on-sale`.
+
+Note: each badge receives a class `badgeText` with its specification value slug appended to it.
+Example: with the specification `Nationality: Brazilian` the badge will also have the class `badgeText--brazilian`.
 
 ## Contributors ✨
 
