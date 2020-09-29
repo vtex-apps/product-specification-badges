@@ -50,7 +50,7 @@ const getVisibleBadges = (
     return []
   }
   const { specificationGroups } = product
-  
+
   const group = specificationGroups?.find(propEq('originalName', groupName))
 
   if (!group) {
@@ -153,8 +153,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
 
               if (specificationValues.length > 1) {
                 console.warn(
-                  `[product-specification-badges] The specification "${
-                  badge.specification.name
+                  `[product-specification-badges] The specification "${badge.specification.name
                   }" have multiple values (${specificationValues.join(
                     ','
                   )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
@@ -172,13 +171,15 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
             return null
           }
           const slugifiedName = slugify(badge.specification.name)
+          const slugifiedValue = valueToShow && slugify(valueToShow)
           const marginToken = getMarginToken(isVertical, idx === 0, idx === badges.length - 1)
+          
           return (
             <div
               key={`${badge.specification.name}-${valueToShow}`}
               className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center"`}
             >
-              <span className={`${handles.badgeText} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
+              <span className={`${applyModifiers(handles.badgeText, slugifiedValue ? slugifiedValue : "")} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
             </div>
           )
         })}

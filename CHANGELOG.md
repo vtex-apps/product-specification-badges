@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- CSS Handles to specification value.
+
 ## [0.1.2] - 2020-08-10
 ### Fixed
 - Component does not display its values if locale is changed.
