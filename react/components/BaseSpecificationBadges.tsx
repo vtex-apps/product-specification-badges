@@ -1,5 +1,5 @@
 import React from 'react'
-import { propEq, concat } from 'ramda'
+import { propEq } from 'ramda'
 import slugify from '../modules/slug'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
 
@@ -100,7 +100,7 @@ const getVisibleBadges = (
     const optionsBadges = specificationsOptions.map(option =>
       getValidSpecificationForCondition(option, group.specifications))
       .filter(Boolean) as VisibleSpecification[]
-    badges = badges.concat(optionsBadges)
+    badges = badge(optionsBadges)
   }
 
   return badges
