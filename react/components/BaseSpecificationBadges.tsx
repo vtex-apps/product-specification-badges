@@ -40,6 +40,29 @@ interface VisibleSpecification {
   displayValue: Condition['displayValue']
 }
 
+const getSpecificationGroupsList = (product: Product | undefined): SpecificationGroup[] => {
+  const { properties, specificationGroups } = product || {};
+
+  const allSpecifications = properties?.map(specification => ({
+    name: specification.name,
+    values: specification.values,
+    originalName: specification.name
+  })) || []
+
+  const specificationGroupsList = specificationGroups?.filter(specificationGroup =>
+    (specificationGroup.name !== "allSpecifications")
+  ) || []
+
+  return [
+    ...specificationGroupsList,
+    {
+      name: "allSpecifications",
+      originalName: "allSpecifications",
+      specifications: allSpecifications
+    }
+  ]
+}
+
 const getVisibleBadges = (
   product: Product | undefined,
   baseCondition: ConditionWithName,
@@ -49,7 +72,8 @@ const getVisibleBadges = (
   if (!product) {
     return []
   }
-  const { specificationGroups } = product
+
+  const specificationGroups = getSpecificationGroupsList(product);
 
   const group = specificationGroups?.find(propEq('originalName', groupName))
 

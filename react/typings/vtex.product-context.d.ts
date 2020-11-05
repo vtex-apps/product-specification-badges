@@ -11,14 +11,17 @@ interface SelectedItem {
 interface Specification {
   name: string
   values: [string]
+  originalName?: string
 }
 
 interface SpecificationGroup {
   name: string
+  originalName?: string
   specifications: Specification[]
 }
 
 interface Product {
+  properties?: Specification[]
   specificationGroups?: SpecificationGroup[]
 }
 

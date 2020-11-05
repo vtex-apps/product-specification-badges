@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2020-11-04
+
+### Changed
+- Updated the specification groups list source, so it might have more options available.
+
+### Added
+- CSS Handles to specification value.
+
 ## [0.2.0] - 2020-09-29
 
 ### Added
