@@ -26,7 +26,7 @@ const checkConditionForSpecification = (condition: Condition, specification: Spe
 
 const getValidSpecificationForCondition = (condition: ConditionWithName, specifications: Specification[]) => {
   const { displayValue, specificationName } = condition
-  const specification = specifications.find(propEq('name', specificationName))
+  const specification = specifications.find(propEq('originalName', specificationName)) || specifications.find(propEq('name', specificationName))
   if (!specification) {
     return null
   }
@@ -70,9 +70,10 @@ const getVisibleBadges = (
     }).filter(Boolean) as VisibleSpecification[]
   }
 
-  if (specificationsOptions && properties) {
+  if (specificationsOptions && (properties || group)) {
+    const specifications = group ? group.specifications : properties
     const optionsBadges = specificationsOptions.map(option =>
-      getValidSpecificationForCondition(option, properties))
+      getValidSpecificationForCondition(option, specifications))
       .filter(Boolean) as VisibleSpecification[]
     badges = badges.concat(optionsBadges)    
   }
