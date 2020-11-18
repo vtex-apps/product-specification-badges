@@ -20,6 +20,7 @@ interface SpecificationGroup {
 
 interface Product {
   specificationGroups?: SpecificationGroup[]
+  properties: Specification[]
 }
 
 declare module 'vtex.product-context/useProduct' {

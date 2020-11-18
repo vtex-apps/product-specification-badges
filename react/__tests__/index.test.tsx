@@ -117,7 +117,7 @@ test('show names inside group that meet conditions array', () => {
           name: 'PromoExclusion',
           originalName: 'PromoExclusion',
           values: ['1'],
-        }
+        },
       ],
     },
     {
