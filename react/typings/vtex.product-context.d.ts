@@ -8,18 +8,26 @@ interface SelectedItem {
   }[]
 }
 
-interface Specification {
+interface SpecificationGroupItem {
   name: string
-  values: [string]
+  originalName: string
+  values: string[]
 }
 
 interface SpecificationGroup {
   name: string
-  specifications: Specification[]
+  originalName: string
+  specifications: SpecificationGroupItem[]
+}
+
+interface SpecificationProperty {
+  name: string
+  values: string[]
 }
 
 interface Product {
   specificationGroups?: SpecificationGroup[]
+  properties?: SpecificationProperty[]
 }
 
 declare module 'vtex.product-context/useProduct' {

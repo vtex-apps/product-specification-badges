@@ -1,5 +1,4 @@
 import React from 'react'
-import { propEq } from 'ramda'
 import slugify from '../modules/slug'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
 
@@ -11,7 +10,10 @@ interface Props {
   product?: Product
 }
 
-const checkConditionForSpecification = (condition: Condition, specification: Specification) => {
+const checkConditionForSpecification = (
+  condition: Condition,
+  specification: SpecificationProperty
+) => {
   const { displayValue, visibleWhen } = condition
   if (!displayValue) {
     return false
@@ -21,22 +23,40 @@ const checkConditionForSpecification = (condition: Condition, specification: Spe
     return specification.values && specification.values[0]
   }
 
-  return specification.values && visibleWhen && specification.values[0] === visibleWhen
+  return (
+    specification.values &&
+    visibleWhen &&
+    specification.values[0] === visibleWhen
+  )
 }
 
-const getValidSpecificationForCondition = (condition: ConditionWithName, specifications: Specification[]) => {
+const getValidSpecificationForCondition = (
+  condition: ConditionWithName,
+  specifications: SpecificationProperty[]
+) => {
   const { displayValue, specificationName } = condition
-  const specification = specifications.find(propEq('originalName', specificationName))
+  const specification = specifications.find(
+    (spec) => spec.name === specificationName
+  )
+
   if (!specification) {
     return null
   }
 
   const isValid = checkConditionForSpecification(condition, specification)
-  return isValid ? { displayValue, specification } : null
+
+  if (!isValid) {
+    return null
+  }
+
+  return {
+    displayValue,
+    specification,
+  }
 }
 
 interface VisibleSpecification {
-  specification: Specification
+  specification: SpecificationProperty
   displayValue: Condition['displayValue']
 }
 
@@ -49,32 +69,52 @@ const getVisibleBadges = (
   if (!product) {
     return []
   }
-  const { specificationGroups } = product
+  const { specificationGroups, properties } = product
 
-  const group = specificationGroups?.find(propEq('originalName', groupName))
+  let specifications: SpecificationProperty[] = []
 
-  if (!group) {
-    return []
+  if (properties?.length) {
+    specifications = properties
+  } else {
+    // map specificationGroup values to properties for backwards-compatibility
+    const group = specificationGroups?.find((g) => g.originalName === groupName)
+
+    if (group) {
+      specifications = group.specifications.map((i) => ({
+        name: i.originalName,
+        values: i.values,
+      }))
+    }
   }
 
-  let badges = [] as VisibleSpecification[]
+  if (specifications.length === 0) {
+    return specifications
+  }
+
+  let badges: VisibleSpecification[] = []
 
   if (baseCondition.visibleWhen && baseCondition.displayValue) {
     const { specificationName } = baseCondition
-    const specifications =
-      specificationName ? group.specifications.filter(propEq('originalName', specificationName)) : group.specifications
 
-    badges = specifications.map(spec => {
-      if (checkConditionForSpecification(baseCondition, spec)) {
-        return { specification: spec, displayValue: baseCondition.displayValue }
-      }
-      return null
-    }).filter(Boolean) as VisibleSpecification[]
+    badges = specifications
+      .filter((spec) => spec.name === specificationName)
+      .map((spec) => {
+        if (checkConditionForSpecification(baseCondition, spec)) {
+          return {
+            specification: spec,
+            displayValue: baseCondition.displayValue,
+          }
+        }
+        return
+      })
+      .filter(Boolean) as VisibleSpecification[]
   }
 
   if (specificationsOptions) {
-    const optionsBadges = specificationsOptions.map(option =>
-      getValidSpecificationForCondition(option, group.specifications))
+    const optionsBadges = specificationsOptions
+      .map((option) =>
+        getValidSpecificationForCondition(option, specifications)
+      )
       .filter(Boolean) as VisibleSpecification[]
     badges = badges.concat(optionsBadges)
   }
@@ -122,99 +162,126 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   orientation = Orientations.vertical,
   multipleValuesSeparator,
 }) => {
-    const badges = getVisibleBadges(
-      product,
-      { specificationName, displayValue, visibleWhen },
-      specificationGroupName,
-      specificationsOptions
-    )
-    const handles = useCssHandles(CSS_HANDLES)
+  const badges = getVisibleBadges(
+    product,
+    { specificationName, displayValue, visibleWhen },
+    specificationGroupName,
+    specificationsOptions
+  )
+  const handles = useCssHandles(CSS_HANDLES)
 
-    if (!product || badges.length === 0) {
-      return null
-    }
+  if (!product || badges.length === 0) {
+    return null
+  }
 
-    const isVertical = orientation === Orientations.vertical
+  const isVertical = orientation === Orientations.vertical
 
-    const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
+  const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
-    return (
-      <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
-        {badges.map((badge, idx) => {
-          const { displayValue } = badge
-          let valueToShow = displayValue
-          if (displayValue === DisplayValues.specificationValue) {
-            const specificationValues = badge.specification.values
+  return (
+    <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
+      {badges.map((badge, idx) => {
+        const { displayValue } = badge
+        let valueToShow = displayValue
+        if (displayValue === DisplayValues.specificationValue) {
+          const specificationValues = badge.specification.values
 
-            if (multipleValuesSeparator != null) {
-              valueToShow = specificationValues.join(multipleValuesSeparator)
-            } else {
-              valueToShow = specificationValues[0]
+          if (multipleValuesSeparator != null) {
+            valueToShow = specificationValues.join(multipleValuesSeparator)
+          } else {
+            valueToShow = specificationValues[0]
 
-              if (specificationValues.length > 1) {
-                console.warn(
-                  `[product-specification-badges] The specification "${badge.specification.name
-                  }" have multiple values (${specificationValues.join(
-                    ','
-                  )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
-                )
-              }
+            if (specificationValues.length > 1) {
+              console.warn(
+                `[product-specification-badges] The specification "${
+                  badge.specification.name
+                }" have multiple values (${specificationValues.join(
+                  ','
+                )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
+              )
             }
           }
+        }
 
-          if (displayValue === DisplayValues.specificationName) {
-            valueToShow = badge.specification.name
-          }
+        if (displayValue === DisplayValues.specificationName) {
+          valueToShow = badge.specification.name
+        }
 
-          if (!displayValue) {
-            console.warn('You need to set a `displayValue` for the `product-specification-badges` block, either `SPECIFICATION_VALUE` or `SPECIFICATION_NAME`')
-            return null
-          }
-          const slugifiedName = slugify(badge.specification.name)
-          const slugifiedValue = valueToShow && slugify(valueToShow)
-          const marginToken = getMarginToken(isVertical, idx === 0, idx === badges.length - 1)
-          
-          return (
-            <div
-              key={`${badge.specification.name}-${valueToShow}`}
-              className={`${applyModifiers(handles.badgeContainer, slugifiedName)} ${marginToken} bg-base flex items-center justify-center"`}
-            >
-              <span className={`${applyModifiers(handles.badgeText, slugifiedValue ? slugifiedValue : "")} ma3 t-body c-muted-1 tc`}>{valueToShow}</span>
-            </div>
+        if (!displayValue) {
+          console.warn(
+            'You need to set a `displayValue` for the `product-specification-badges` block, either `SPECIFICATION_VALUE` or `SPECIFICATION_NAME`'
           )
-        })}
-      </div>
-    )
-  }
+          return null
+        }
+        const slugifiedName = slugify(badge.specification.name)
+        const slugifiedValue = valueToShow && slugify(valueToShow)
+        const marginToken = getMarginToken(
+          isVertical,
+          idx === 0,
+          idx === badges.length - 1
+        )
+
+        return (
+          <div
+            key={`${badge.specification.name}-${valueToShow}`}
+            className={`${applyModifiers(
+              handles.badgeContainer,
+              slugifiedName
+            )} ${marginToken} bg-base flex items-center justify-center"`}
+          >
+            <span
+              className={`${applyModifiers(
+                handles.badgeText,
+                slugifiedValue ? slugifiedValue : ''
+              )} ma3 t-body c-muted-1 tc`}
+            >
+              {valueToShow}
+            </span>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 BaseSpecificationBadges.schema = {
   type: 'object',
   properties: {
     specificationGroupName: {
       type: 'string',
-      title: 'admin/editor.product-specification-badges.specificationGroupName.title',
-      description: 'admin/editor.product-specification-badges.specificationGroupName.description'
+      title:
+        'admin/editor.product-specification-badges.specificationGroupName.title',
+      description:
+        'admin/editor.product-specification-badges.specificationGroupName.description',
     },
     specificationName: {
       type: 'string',
-      title: 'admin/editor.product-specification-badges.specificationName.title',
-      description: 'admin/editor.product-specification-badges.specificationName.description'
+      title:
+        'admin/editor.product-specification-badges.specificationName.title',
+      description:
+        'admin/editor.product-specification-badges.specificationName.description',
     },
     visibleWhen: {
       type: 'string',
       title: 'admin/editor.product-specification-badges.visibleWhen.title',
-      description: 'admin/editor.product-specification-badges.visibleWhen.description'
+      description:
+        'admin/editor.product-specification-badges.visibleWhen.description',
     },
     displayValue: {
       type: 'string',
       title: 'admin/editor.product-specification-badges.displayValue.title',
-      description: 'admin/editor.product-specification-badges.displayValue.description'
+      description:
+        'admin/editor.product-specification-badges.displayValue.description',
     },
     orientation: {
       title: 'admin/editor.product-specification-badges.orientation.title',
-      description: 'admin/editor.product-specification-badges.orientation.description',
+      description:
+        'admin/editor.product-specification-badges.orientation.description',
       enum: ['vertical', 'horizontal'],
-      enumNames: ['admin/editor.product-specification-badges.orientation.vertical', 'admin/editor.product-specification-badges.orientation.horizontal'],
+      enumNames: [
+        'admin/editor.product-specification-badges.orientation.vertical',
+        'admin/editor.product-specification-badges.orientation.horizontal',
+      ],
       type: 'string',
       default: 'vertical',
       widget: {
@@ -226,28 +293,34 @@ BaseSpecificationBadges.schema = {
     },
     specificationsOptions: {
       type: 'array',
-      title: 'admin/editor.product-specification-badges.specificationsOptions.title',
-      description: 'admin/editor.product-specification-badges.specificationsOptions.description',
+      title:
+        'admin/editor.product-specification-badges.specificationsOptions.title',
+      description:
+        'admin/editor.product-specification-badges.specificationsOptions.description',
       items: {
-        title: 'admin/editor.product-specification-badges.specificationsOptions.item.title',
+        title:
+          'admin/editor.product-specification-badges.specificationsOptions.item.title',
         type: 'object',
         properties: {
           specificationName: {
             type: 'string',
-            title: 'admin/editor.product-specification-badges.specificationName.title',
+            title:
+              'admin/editor.product-specification-badges.specificationName.title',
           },
           visibleWhen: {
             type: 'string',
-            title: 'admin/editor.product-specification-badges.visibleWhen.title',
+            title:
+              'admin/editor.product-specification-badges.visibleWhen.title',
           },
           displayValue: {
             type: 'string',
-            title: 'admin/editor.product-specification-badges.displayValue.title',
+            title:
+              'admin/editor.product-specification-badges.displayValue.title',
           },
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 }
 
 export default BaseSpecificationBadges
