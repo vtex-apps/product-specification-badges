@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@vtex/test-tools/react'
-import ProductContextProvider from 'vtex.product-context/ProductContextProvider'
+import { ProductContextProvider } from 'vtex.product-context'
 
 import Index from '../index'
 import { getProduct } from '../__fixtures__/product'
@@ -9,7 +9,7 @@ const renderComponent = (customProps: any = {}) => {
   const product = customProps.product || getProduct()
 
   return render(
-    <ProductContextProvider product={product}>
+    <ProductContextProvider query={{}} product={product}>
       <Index
         visibleWhen={customProps.visibleWhen}
         specificationsOptions={customProps.specificationsOptions}
@@ -345,18 +345,6 @@ test('show demo, value and custom string', () => {
   ]
 
   const { queryByText } = renderComponent({
-    // specificationsOptions: {
-    //   ['On Sale']: {
-    //     displayValue: 'SPECIFICATION_NAME',
-    //     visibleWhen: 'True',
-    //   },
-    //   Demo: {
-    //     displayValue: 'SPECIFICATION_VALUE',
-    //   },
-    //   PromoExclusion: {
-    //     displayValue: "Custom String"
-    //   }
-    // },
     specificationsOptions: [
       {
         specificationName: 'On Sale',

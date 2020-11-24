@@ -1,5 +1,9 @@
 import React from 'react'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
+import type {
+  Product,
+  ProductSpecification,
+} from 'vtex.product-context/react/ProductTypes'
 
 import slugify from '../modules/slug'
 import { Orientations, DisplayValues } from '../modules/constants'
@@ -12,7 +16,7 @@ interface Props {
 
 const checkConditionForSpecification = (
   condition: Condition,
-  specification: SpecificationProperty
+  specification: ProductSpecification
 ) => {
   const { displayValue, visibleWhen } = condition
 
@@ -21,7 +25,7 @@ const checkConditionForSpecification = (
   }
 
   if (!visibleWhen) {
-    return specification.values && specification.values[0]
+    return specification?.values[0]
   }
 
   return (
@@ -33,7 +37,7 @@ const checkConditionForSpecification = (
 
 const getValidSpecificationForCondition = (
   condition: ConditionWithName,
-  specifications: SpecificationProperty[]
+  specifications: ProductSpecification[]
 ) => {
   const { displayValue, specificationName } = condition
   const specification = specifications.find(
@@ -57,23 +61,28 @@ const getValidSpecificationForCondition = (
 }
 
 interface VisibleSpecification {
-  specification: SpecificationProperty
+  specification: ProductSpecification
   displayValue: Condition['displayValue']
 }
 
-const getVisibleBadges = (
-  product: Product | undefined,
-  baseCondition: ConditionWithName,
-  groupName: string,
+const getVisibleBadges = ({
+  product,
+  baseCondition,
+  groupName,
+  specificationsOptions,
+}: {
+  product: Product | undefined
+  baseCondition: ConditionWithName
+  groupName: string
   specificationsOptions: BaseProps['specificationsOptions']
-): VisibleSpecification[] => {
+}): VisibleSpecification[] => {
   if (!product) {
     return []
   }
 
   const { specificationGroups, properties } = product
 
-  let specifications: SpecificationProperty[] = []
+  let specifications: ProductSpecification[] = []
 
   if (properties?.length) {
     specifications = properties
@@ -173,12 +182,12 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   orientation = Orientations.vertical,
   multipleValuesSeparator,
 }) => {
-  const badges = getVisibleBadges(
+  const badges = getVisibleBadges({
     product,
-    { specificationName, displayValue, visibleWhen },
-    specificationGroupName,
-    specificationsOptions
-  )
+    baseCondition: { specificationName, displayValue, visibleWhen },
+    groupName: specificationGroupName,
+    specificationsOptions,
+  })
 
   const handles = useCssHandles(CSS_HANDLES)
 
