@@ -1,7 +1,7 @@
 import React from 'react'
-import slugify from '../modules/slug'
 import { useCssHandles, applyModifiers } from 'vtex.css-handles'
 
+import slugify from '../modules/slug'
 import { Orientations, DisplayValues } from '../modules/constants'
 
 const CSS_HANDLES = ['groupContainer', 'badgeContainer', 'badgeText'] as const
@@ -15,6 +15,7 @@ const checkConditionForSpecification = (
   specification: SpecificationProperty
 ) => {
   const { displayValue, visibleWhen } = condition
+
   if (!displayValue) {
     return false
   }
@@ -65,10 +66,11 @@ const getVisibleBadges = (
   baseCondition: ConditionWithName,
   groupName: string,
   specificationsOptions: BaseProps['specificationsOptions']
-) => {
+): VisibleSpecification[] => {
   if (!product) {
     return []
   }
+
   const { specificationGroups, properties } = product
 
   let specifications: SpecificationProperty[] = []
@@ -88,7 +90,7 @@ const getVisibleBadges = (
   }
 
   if (specifications.length === 0) {
-    return specifications
+    return []
   }
 
   let badges: VisibleSpecification[] = []
@@ -96,8 +98,13 @@ const getVisibleBadges = (
   if (baseCondition.visibleWhen && baseCondition.displayValue) {
     const { specificationName } = baseCondition
 
-    badges = specifications
-      .filter((spec) => spec.name === specificationName)
+    let specs = specifications
+
+    if (specificationName != null) {
+      specs = specs.filter((spec) => spec.name === specificationName)
+    }
+
+    badges = specs
       .map((spec) => {
         if (checkConditionForSpecification(baseCondition, spec)) {
           return {
@@ -105,7 +112,8 @@ const getVisibleBadges = (
             displayValue: baseCondition.displayValue,
           }
         }
-        return
+
+        return null
       })
       .filter(Boolean) as VisibleSpecification[]
   }
@@ -116,6 +124,7 @@ const getVisibleBadges = (
         getValidSpecificationForCondition(option, specifications)
       )
       .filter(Boolean) as VisibleSpecification[]
+
     badges = badges.concat(optionsBadges)
   }
 
@@ -133,6 +142,7 @@ const getMarginToken = (
     if (!isFirst) {
       marginTokens += 'mt2 '
     }
+
     if (!isLast) {
       marginTokens += 'mb2 '
     }
@@ -142,6 +152,7 @@ const getMarginToken = (
     if (!isFirst) {
       marginTokens += 'ml2 '
     }
+
     if (!isLast) {
       marginTokens += 'mr2 '
     }
@@ -168,6 +179,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
     specificationGroupName,
     specificationsOptions
   )
+
   const handles = useCssHandles(CSS_HANDLES)
 
   if (!product || badges.length === 0) {
@@ -181,9 +193,10 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   return (
     <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
       {badges.map((badge, idx) => {
-        const { displayValue } = badge
-        let valueToShow = displayValue
-        if (displayValue === DisplayValues.specificationValue) {
+        const { displayValue: badgeDisplayValue } = badge
+        let valueToShow = badgeDisplayValue
+
+        if (badgeDisplayValue === DisplayValues.specificationValue) {
           const specificationValues = badge.specification.values
 
           if (multipleValuesSeparator != null) {
@@ -203,16 +216,18 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
           }
         }
 
-        if (displayValue === DisplayValues.specificationName) {
+        if (badgeDisplayValue === DisplayValues.specificationName) {
           valueToShow = badge.specification.name
         }
 
-        if (!displayValue) {
+        if (!badgeDisplayValue) {
           console.warn(
             'You need to set a `displayValue` for the `product-specification-badges` block, either `SPECIFICATION_VALUE` or `SPECIFICATION_NAME`'
           )
+
           return null
         }
+
         const slugifiedName = slugify(badge.specification.name)
         const slugifiedValue = valueToShow && slugify(valueToShow)
         const marginToken = getMarginToken(
@@ -232,7 +247,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
             <span
               className={`${applyModifiers(
                 handles.badgeText,
-                slugifiedValue ? slugifiedValue : ''
+                slugifiedValue || ''
               )} ma3 t-body c-muted-1 tc`}
             >
               {valueToShow}

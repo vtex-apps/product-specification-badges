@@ -1,11 +1,12 @@
+declare module 'vtex.product-context/ProductContextProvider'
 interface SelectedItem {
   itemId: string
-  sellers: {
+  sellers: Array<{
     sellerId: string
     commertialOffer: {
       AvailableQuantity: number
     }
-  }[]
+  }>
 }
 
 interface SpecificationGroupItem {
