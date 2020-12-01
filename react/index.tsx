@@ -1,5 +1,6 @@
 import React from 'react'
-import useProduct from 'vtex.product-context/useProduct'
+import { useProduct } from 'vtex.product-context'
+
 import BaseSpecificationBadges from './components/BaseSpecificationBadges'
 
 const ProductSpecificationBadges: StorefrontFunctionComponent<BaseProps> = ({
@@ -11,7 +12,14 @@ const ProductSpecificationBadges: StorefrontFunctionComponent<BaseProps> = ({
   orientation,
   multipleValuesSeparator,
 }) => {
-  const { product } = useProduct()
+  const ctx = useProduct()
+
+  if (ctx?.product == null) {
+    return null
+  }
+
+  const { product } = ctx
+
   return (
     <BaseSpecificationBadges
       product={product}
