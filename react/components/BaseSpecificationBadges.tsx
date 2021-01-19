@@ -41,8 +41,7 @@ const getValidSpecificationForCondition = (
 ) => {
   const { displayValue, specificationName } = condition
   const specification = specifications.find(
-    (spec) =>
-      spec.originalName === specificationName || spec.name === specificationName
+    (spec) => spec.name === specificationName
   )
 
   if (!specification) {
@@ -92,7 +91,10 @@ const getVisibleBadges = ({
     const group = specificationGroups?.find((g) => g.originalName === groupName)
 
     if (group) {
-      specifications = group.specifications
+      specifications = group.specifications.map((i) => ({
+        name: i.originalName,
+        values: i.values,
+      }))
     }
   }
 
@@ -108,11 +110,7 @@ const getVisibleBadges = ({
     let specs = specifications
 
     if (specificationName != null) {
-      specs = specs.filter(
-        (spec) =>
-          spec.originalName === specificationName ||
-          spec.name === specificationName
-      )
+      specs = specs.filter((spec) => spec.name === specificationName)
     }
 
     badges = specs
@@ -218,7 +216,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
             if (specificationValues.length > 1) {
               console.warn(
                 `[product-specification-badges] The specification "${
-                  badge.specification.originalName
+                  badge.specification.name
                 }" have multiple values (${specificationValues.join(
                   ','
                 )}) but the "multipleValuesSeparator" prop was not set. Please refer to this app's documentation for further detail on how to show all the values at once: https://vtex.io/docs/app/vtex.product-specification-badges`
@@ -239,7 +237,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
           return null
         }
 
-        const slugifiedName = slugify(badge.specification.originalName)
+        const slugifiedName = slugify(badge.specification.name)
         const slugifiedValue = valueToShow && slugify(valueToShow)
         const marginToken = getMarginToken(
           isVertical,
@@ -249,7 +247,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
 
         return (
           <div
-            key={`${badge.specification.originalName}-${valueToShow}`}
+            key={`${badge.specification.name}-${valueToShow}`}
             className={`${applyModifiers(
               handles.badgeContainer,
               slugifiedName
