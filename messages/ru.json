@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "Product Specification Badges",
+  "admin/editor.product-specification-badges.description": "Component to show product specification badges on product page",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "Specification Group Name",
+  "admin/editor.product-specification-badges.specificationName.title": "Specification Name",
+  "admin/editor.product-specification-badges.visibleWhen.title": "Visible When",
+  "admin/editor.product-specification-badges.displayValue.title": "Display Value",
+  "admin/editor.product-specification-badges.orientation.title": "Orientation",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "Specifications Options",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "Specification Option",
+  "admin/editor.product-specification-badges.orientation.horizontal": "Horizontal",
+  "admin/editor.product-specification-badges.orientation.vertical": "Vertical",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "Name of the group you want to target",
+  "admin/editor.product-specification-badges.specificationName.description": "Name of the specification you want to target, leave empty to target all inside group",
+  "admin/editor.product-specification-badges.visibleWhen.description": "Insert value to display badge only when specification value is an exact match",
+  "admin/editor.product-specification-badges.displayValue.description": "Choose what to show inside badge. Read documentation for possible values.",
+  "admin/editor.product-specification-badges.orientation.description": "Choose orientation in which to display badges",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Specify more detailed options for different specifications within group"
+}
