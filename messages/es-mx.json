@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "Insignias de especificación de producto",
+  "admin/editor.product-specification-badges.description": "Componente para mostrar insignias de especificación de producto en la página de producto",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "Nombre del grupo de especificación",
+  "admin/editor.product-specification-badges.specificationName.title": "Nombre de especificación",
+  "admin/editor.product-specification-badges.visibleWhen.title": "Visible cuándo",
+  "admin/editor.product-specification-badges.displayValue.title": "Valor para mostrar",
+  "admin/editor.product-specification-badges.orientation.title": "Orientación",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "Opciones de especificaciones",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "Opción de especificación",
+  "admin/editor.product-specification-badges.orientation.horizontal": "Horizontal",
+  "admin/editor.product-specification-badges.orientation.vertical": "Vertical",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "Nombre del grupo que deseas aplicar",
+  "admin/editor.product-specification-badges.specificationName.description": "Nombre de la especificación que deseas aplicar. Deja en blanco para aplicar en todas dentro del grupo.",
+  "admin/editor.product-specification-badges.visibleWhen.description": "Ingresa un valor para mostrar la insignia solo cuando el valor de la especificación sea una coincidencia exacta",
+  "admin/editor.product-specification-badges.displayValue.description": "Elige lo que deseas mostrar dentro de la insignia. Lee la documentación para conocer los valores posibles.",
+  "admin/editor.product-specification-badges.orientation.description": "Selecciona la orientación en la que deseas mostrar las insignias",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Especifica opciones más detalladas para diferentes especificaciones dentro del grupo"
+}
