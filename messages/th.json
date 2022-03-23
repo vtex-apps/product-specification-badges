@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "แบดจ์ข้อมูลจำเพาะผลิตภัณฑ์",
+  "admin/editor.product-specification-badges.description": "องค์ประกอบที่แสดงแบดจ์ข้อมูลจำเพาะผลิตภัณฑ์ในหน้าผลิตภัณฑ์",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "ชื่อกลุ่มข้อมูลจำเพาะ",
+  "admin/editor.product-specification-badges.specificationName.title": "ชื่อข้อมูลจำเพาะ",
+  "admin/editor.product-specification-badges.visibleWhen.title": "มองเห็นเมื่อ",
+  "admin/editor.product-specification-badges.displayValue.title": "แสดงค่า",
+  "admin/editor.product-specification-badges.orientation.title": "การวางแนว",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "ตัวเลือกข้อมูลจำเพาะ",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "ตัวเลือกข้อมูลจำเพาะ",
+  "admin/editor.product-specification-badges.orientation.horizontal": "แนวนอน",
+  "admin/editor.product-specification-badges.orientation.vertical": "แนวตั้ง",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "ชื่อกลุ่มที่คุณต้องการให้เป็นเป้าหมาย",
+  "admin/editor.product-specification-badges.specificationName.description": "ชื่อข้อมูลจำเพาะที่คุณต้องการให้เป็นเป้าหมาย ทิ้งว่างไว้เพื่อให้เป็นเป้าทั้งหมดในกลุ่ม",
+  "admin/editor.product-specification-badges.visibleWhen.description": "ใส่ค่าเพื่อแสดงแบดจ์เฉพาะเมื่อค่าข้อมูลจำเพาะตรงกันพอดี",
+  "admin/editor.product-specification-badges.displayValue.description": "เลือกสิ่งที่จะแสดงในแบดจ์ อ่านเอกสารสำหรับค่าที่เป็นไปได้",
+  "admin/editor.product-specification-badges.orientation.description": "เลือกการวางแนวที่จะใช้แสดงแบดจ์",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "ระบุตัวเลือกที่มีรายละเอียดเพิ่มเติมสำหรับข้อมูลจำเพาะที่ต่างกันในกลุ่ม"
+}
