@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "제품 사양 배지",
+  "admin/editor.product-specification-badges.description": "제품 페이지에 제품 사양 배지를 표시할 구성 요소",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "사양 그룹 이름",
+  "admin/editor.product-specification-badges.specificationName.title": "사양 이름",
+  "admin/editor.product-specification-badges.visibleWhen.title": "표시 시기",
+  "admin/editor.product-specification-badges.displayValue.title": "디스플레이 값",
+  "admin/editor.product-specification-badges.orientation.title": "방향",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "사양 옵션",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "사양 옵션",
+  "admin/editor.product-specification-badges.orientation.horizontal": "수평",
+  "admin/editor.product-specification-badges.orientation.vertical": "수직",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "타켓으로 지정할 그룹 이름",
+  "admin/editor.product-specification-badges.specificationName.description": "타겟으로 지정할 사양의 이름. 모든 내부 그룹을 타겟으로 하려면 비워 두세요.",
+  "admin/editor.product-specification-badges.visibleWhen.description": "사양 값이 정확히 일치하는 경우에만 배지를 표시할 값 입력",
+  "admin/editor.product-specification-badges.displayValue.description": "내부 배지를 표시할 항목을 선택합니다. 가능한 값은 사양을 읽어 보십시오.",
+  "admin/editor.product-specification-badges.orientation.description": "배지를 표시할 방향 선택",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "그룹 내 여러 사양에 대한 자세한 옵션 지정"
+}
