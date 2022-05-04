@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "製品仕様バッジ",
+  "admin/editor.product-specification-badges.description": "製品仕様バッジを製品ページに表示するコンポーネント",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "仕様グループ名",
+  "admin/editor.product-specification-badges.specificationName.title": "仕様名",
+  "admin/editor.product-specification-badges.visibleWhen.title": "表示される時",
+  "admin/editor.product-specification-badges.displayValue.title": "金額を表示",
+  "admin/editor.product-specification-badges.orientation.title": "方向",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "仕様オプション",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "仕様オプション",
+  "admin/editor.product-specification-badges.orientation.horizontal": "水平",
+  "admin/editor.product-specification-badges.orientation.vertical": "垂直",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "ターゲットにするグループ名",
+  "admin/editor.product-specification-badges.specificationName.description": "ターゲットにしたい仕様名です。空欄にするとすべての内部グループをターゲットにします",
+  "admin/editor.product-specification-badges.visibleWhen.description": "値を挿入してください。この値と仕様値とが正確に一致する時のみ、バッジが表示されます",
+  "admin/editor.product-specification-badges.displayValue.description": "内部バッジに表示する内容を選んでください。どの値を表示できるかは、ドキュメンテーションをご覧ください。",
+  "admin/editor.product-specification-badges.orientation.description": "バッジを表示する方向を選んでください",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "グループ内で仕様が異なる場合について、詳細なオプションを指定してください"
+}
