@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "شارات مواصفات المنتج",
+  "admin/editor.product-specification-badges.description": "مكون لإظهار شارات مواصفات المنتج على صفحة المنتج",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "اسم مجموعة المواصفات",
+  "admin/editor.product-specification-badges.specificationName.title": "اسم المواصفات",
+  "admin/editor.product-specification-badges.visibleWhen.title": "مرئي خلال",
+  "admin/editor.product-specification-badges.displayValue.title": "عرض القيمة",
+  "admin/editor.product-specification-badges.orientation.title": "التوجيه",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "خيارات المواصفات",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "خيار المواصفات",
+  "admin/editor.product-specification-badges.orientation.horizontal": "أفقي",
+  "admin/editor.product-specification-badges.orientation.vertical": "عمودي",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "اسم المجموعة التي تريد استهدافها",
+  "admin/editor.product-specification-badges.specificationName.description": "اسم المواصفات التي تريد استهدافها، اتركه فارغاً لاستهداف الجميع داخل المجموعة",
+  "admin/editor.product-specification-badges.visibleWhen.description": "قم بإدراج قيمة لعرض الشارة فقط عندما تكون قيمة المواصفات متطابقة بشكل دقيق",
+  "admin/editor.product-specification-badges.displayValue.description": "اختر ما تريد إظهاره داخل الشارة. اقرأ الوثائق للقيم المحتملة.",
+  "admin/editor.product-specification-badges.orientation.description": "اختر الاتجاه الذي سيتم فيه عرض الشارات",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "قم بتحديد خيارات أكثر تفصيلاً للمواصفات المختلفة داخل المجموعة"
+}
