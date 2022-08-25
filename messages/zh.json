@@ -1,0 +1,19 @@
+{
+  "admin/editor.product-specification-badges.title": "產品規格徽章",
+  "admin/editor.product-specification-badges.description": "在產品頁面上顯示產品規格徽章的組件",
+  "admin/editor.product-specification-badges.specificationGroupName.title": "規格分組名稱",
+  "admin/editor.product-specification-badges.specificationName.title": "規格名稱",
+  "admin/editor.product-specification-badges.visibleWhen.title": "可見時間段",
+  "admin/editor.product-specification-badges.displayValue.title": "顯示數值",
+  "admin/editor.product-specification-badges.orientation.title": "方向",
+  "admin/editor.product-specification-badges.specificationsOptions.title": "規格選項",
+  "admin/editor.product-specification-badges.specificationsOptions.item.title": "規則選項",
+  "admin/editor.product-specification-badges.orientation.horizontal": "水平",
+  "admin/editor.product-specification-badges.orientation.vertical": "垂直",
+  "admin/editor.product-specification-badges.specificationGroupName.description": "您的目標分組名稱",
+  "admin/editor.product-specification-badges.specificationName.description": "您的目標分組名稱，目標內所有分組留空",
+  "admin/editor.product-specification-badges.visibleWhen.description": "僅當規格值完全匹配時才插入顯示徽章的值",
+  "admin/editor.product-specification-badges.displayValue.description": "選擇徽章內部顯示的值。查看文檔，了解所有可能的值。",
+  "admin/editor.product-specification-badges.orientation.description": "選擇顯示徽章的方向",
+  "admin/editor.product-specification-badges.specificationsOptions.description": "爲分組內的不同規範指定更詳細的選項"
+}
