@@ -11,7 +11,8 @@ import { Orientations, DisplayValues } from '../modules/constants'
 const CSS_HANDLES = ['groupContainer', 'badgeContainer', 'badgeText'] as const
 
 interface Props {
-  product?: Product
+  product?: Product,
+  arialabel?: string
 }
 
 const checkConditionForSpecification = (
@@ -181,6 +182,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   displayValue,
   orientation = Orientations.vertical,
   multipleValuesSeparator,
+  arialabel
 }) => {
   const badges = getVisibleBadges({
     product,
@@ -200,7 +202,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   const orientationToken = isVertical ? 'inline-flex flex-column' : 'flex'
 
   return (
-    <div className={`${handles.groupContainer} ${orientationToken} ma2`}>
+    <div aria-label={arialabel} className={`${handles.groupContainer} ${orientationToken} ma2`}>
       {badges.map((badge, idx) => {
         const { displayValue: badgeDisplayValue } = badge
         let valueToShow = badgeDisplayValue
