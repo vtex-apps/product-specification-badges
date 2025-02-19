@@ -19,7 +19,7 @@ This component must be configured to be able to display the specifications prope
 | `specificationName`           | `String`                                                  | Pass the name of the specification you want to target. If left empy, will target all of the group                                                                                                                                                                                       | `""`          |
 | `specificationsOptions`       | `Array<Option>`                                           | Pass this if you want to control the conditions to show certain specifications. Each value of the array should be a valid object of the `Option` format.                                                                                                                                | `null`        |
 | `visibleWhen`                 | `String`                                                  | Pass this if you want the specification to be displayed only if it has this exact value. If left empty, the badge will be showed regardless of the specification value.                                                                                                                 | `""`          |
-\| `arialabel`          | `string` | Aria-label to be included for accessibility purposes                      |
+| `arialabel`          | `string` | Aria-label to be included for accessibility purposes                      |
 
 `Option` type:
 
