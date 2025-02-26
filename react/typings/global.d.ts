@@ -4,8 +4,7 @@ import { Orientations } from '../modules/constants'
 declare global {
   interface StorefrontFunctionComponent<P = {}> extends FC<P> {
     getSchema?(props: P): object
-    schema?: object,
-    arialabel?: string
+    schema?: object
   }
 
   interface StorefrontComponent<P = {}, S = {}> extends Component<P, S> {
@@ -24,7 +23,6 @@ declare global {
     specificationsOptions?: ConditionWithName[]
     specificationName?: string
     multipleValuesSeparator?: string
-    arialabel?: string
   }
 
   type ConditionWithName = Condition & {
