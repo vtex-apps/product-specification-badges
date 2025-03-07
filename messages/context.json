@@ -15,5 +15,6 @@
   "admin/editor.product-specification-badges.visibleWhen.description": "Description of visibleWhen prop",
   "admin/editor.product-specification-badges.displayValue.description": "Description of displayValue prop",
   "admin/editor.product-specification-badges.orientation.description": "Description of orientation prop",
-  "admin/editor.product-specification-badges.specificationsOptions.description": "Description of specificationsOptions prop"
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Description of specificationsOptions prop",
+  "store/product-specification-badges.aria-label": "Badge {Badge}"
 }
