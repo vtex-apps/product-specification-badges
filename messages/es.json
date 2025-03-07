@@ -16,5 +16,5 @@
   "admin/editor.product-specification-badges.displayValue.description": "Elija qué mostrar dentro de la medalla. Lea la documentación para conocer los posibles valores.",
   "admin/editor.product-specification-badges.orientation.description": "Elija la orientación en la que desea mostrar las medallas",
   "admin/editor.product-specification-badges.specificationsOptions.description": "Especifique opciones más detalladas para diferentes especificaciones dentro del grupo",
-  "store/product-specification-badges.aria-label": "Medalla {Badge}"
+  "store/product-specification-badges.baseSpecificationBadges.aria-label": "Medalla {Badge}"
 }
