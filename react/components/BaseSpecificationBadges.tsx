@@ -181,7 +181,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
   specificationName,
   displayValue,
   orientation = Orientations.vertical,
-  multipleValuesSeparator
+  multipleValuesSeparator,
 }) => {
   const badges = getVisibleBadges({
     product,
