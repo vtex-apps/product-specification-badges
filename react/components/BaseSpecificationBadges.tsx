@@ -250,7 +250,7 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
         return (
           <div
           aria-label={intl.formatMessage(
-            { id: 'store/product-specification-badges.aria-label' }, { Badge: badgeDisplayValue})}
+            { id: 'store/product-specification-badges.baseSpecificationBadges.aria-label' }, { Badge: badgeDisplayValue})}
             key={`${badge.specification.name}-${valueToShow}`}
             className={`${applyModifiers(
               handles.badgeContainer,
