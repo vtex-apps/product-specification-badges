@@ -7,6 +7,7 @@ import type {
 
 import slugify from '../modules/slug'
 import { Orientations, DisplayValues } from '../modules/constants'
+import { useIntl } from 'react-intl'
 
 const CSS_HANDLES = ['groupContainer', 'badgeContainer', 'badgeText'] as const
 
@@ -244,9 +245,12 @@ const BaseSpecificationBadges: StorefrontFunctionComponent<
           idx === 0,
           idx === badges.length - 1
         )
+        const intl = useIntl()
 
         return (
           <div
+          aria-label={intl.formatMessage(
+            { id: 'store/product-specification-badges.baseSpecificationBadges.aria-label' }, { Badge: badgeDisplayValue})}
             key={`${badge.specification.name}-${valueToShow}`}
             className={`${applyModifiers(
               handles.badgeContainer,

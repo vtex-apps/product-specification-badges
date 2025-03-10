@@ -15,5 +15,6 @@
   "admin/editor.product-specification-badges.visibleWhen.description": "Ingrese un valor para mostrar la medalla solo cuando la especificación contenga un valor exactamente igual al pasado",
   "admin/editor.product-specification-badges.displayValue.description": "Elija qué mostrar dentro de la medalla. Lea la documentación para conocer los posibles valores.",
   "admin/editor.product-specification-badges.orientation.description": "Elija la orientación en la que desea mostrar las medallas",
-  "admin/editor.product-specification-badges.specificationsOptions.description": "Especifique opciones más detalladas para diferentes especificaciones dentro del grupo"
+  "admin/editor.product-specification-badges.specificationsOptions.description": "Especifique opciones más detalladas para diferentes especificaciones dentro del grupo",
+  "store/product-specification-badges.baseSpecificationBadges.aria-label": "Medalla {Badge}"
 }
